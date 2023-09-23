@@ -1,1 +1,1 @@
-console.log("hello world");
+(()=>{"use strict";console.log("hello world");let l=(l=>{let o=0;return{length:1,hitsSustained:o,sunk:!1,hit:()=>{o=50},isSunk:()=>!1}})();var o;console.log(l),l.hit(),console.log(l),console.log((o="hello world").charAt(0).toUpperCase()+o.slice(1))})();
