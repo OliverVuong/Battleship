@@ -1,3 +1,7 @@
+import { 
+    setUp
+} from './viewController';
+
 const shipFactory = (len, shipID ='noID', dir = 'south') => {
     const id = shipID;
     const length = len;
@@ -157,6 +161,8 @@ const computerTargetingAIFactory = (board) => {
 
 }
 
+
+
 const gameMasterFactory = () => {
     const board_player = gameBoardFactory();
     const board_computer = gameBoardFactory();
@@ -184,6 +190,10 @@ const gameMasterFactory = () => {
     return { runGameLoop };
 }
 
+let container = document.querySelector("#content");
+container.textContent = "hello world";
+
+setUp();
 
 export { 
     shipFactory,
