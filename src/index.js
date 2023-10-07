@@ -138,7 +138,11 @@ const gameBoardFactory = () => {
         shipArr.push(ship_10);
     }
 
-    return { placeShip, receiveAttack, isValidAttack, isDefeated, initDefaultShips };
+    const getShipGrid = () => {
+        return shipGrid;
+    }
+
+    return { placeShip, receiveAttack, isValidAttack, isDefeated, initDefaultShips, getShipGrid };
 }
 
 const computerTargetingAIFactory = (board) => {
@@ -166,6 +170,7 @@ const computerTargetingAIFactory = (board) => {
 const gameMasterFactory = () => {
     const board_player = gameBoardFactory();
     const board_computer = gameBoardFactory();
+    board_player.initDefaultShips();
     const computerTargetingAI = computerTargetingAIFactory(board_computer);
     let attackLocation;
     const runGameLoop = () => {
@@ -186,14 +191,23 @@ const gameMasterFactory = () => {
             }
         }
     }
+    const getShipGrid = () => {
+        return board_player.getShipGrid();
+    }
 
-    return { runGameLoop };
+    return { runGameLoop, getShipGrid };
 }
 
-let container = document.querySelector("#content");
-container.textContent = "hello world";
+const initiateSite = () => {
+    let game = gameMasterFactory();
+    setUp(game.getShipGrid());
+}
 
-setUp();
+
+
+initiateSite();
+
+
 
 export { 
     shipFactory,

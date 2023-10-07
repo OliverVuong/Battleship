@@ -59,9 +59,31 @@ const createTable = () => {
   return myTable;
 }
 
-const setUp = () => {
+const displayShips = (shipGrid, table) => {
+    for(let row = 0; row < 10; row++){
+        for(let col = 0; col < 10; col++){
+            //console.log(shipGrid[row][col]);
+            if(shipGrid[row][col]){
+                let tableRow = table.children[row + 1];
+                //console.log('hello');
+                //console.log(tableRow);
+                let cell = tableRow.children[col + 1];
+                let myDiv = document.createElement("div");
+                myDiv.classList.add("ship")
+                myDiv.textContent = "s";
+                //cell.textContent = "asdfas";
+                cell.appendChild(myDiv);
+            }
+        }
+    }
+}
+
+const setUp = (shipGrid) => {
     const container = document.querySelector("#content");
-    container.appendChild(createTable());
+    let table = createTable();
+    //console.log(table.children);
+    container.appendChild(table);
+    displayShips(shipGrid, table);
 }
 
 export { 
