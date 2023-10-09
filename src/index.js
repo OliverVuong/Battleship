@@ -1,5 +1,6 @@
 import { 
-    setUp
+    setUpView,
+    markAttack
 } from './viewController';
 
 const shipFactory = (len, shipID ='noID', dir = 'south') => {
@@ -171,6 +172,7 @@ const gameMasterFactory = () => {
     const board_player = gameBoardFactory();
     const board_computer = gameBoardFactory();
     board_player.initDefaultShips();
+    board_computer.initDefaultShips();
     const computerTargetingAI = computerTargetingAIFactory(board_computer);
     let attackLocation;
     const runGameLoop = () => {
@@ -195,21 +197,55 @@ const gameMasterFactory = () => {
         return board_player.getShipGrid();
     }
 
-    return { runGameLoop, getShipGrid };
+    const processUserInput = (row , col) => {
+        console.log(`Valid attack (${row}, ${col}): ${board_computer.isValidAttack(row, col)}`);
+        if(!board_computer.isValidAttack(row, col)){
+            return;
+        }
+        board_computer.receiveAttack(row, col);
+    }
+
+    const isValidAttack = (row, col) => {
+        return board_computer.isValidAttack(row, col);
+    }
+
+    return { runGameLoop, getShipGrid, processUserInput, isValidAttack };
 }
 
-const initiateSite = () => {
+//manages the game and the viewcontroller
+const websiteManagerFactory = () => {
     let game = gameMasterFactory();
-    setUp(game.getShipGrid());
+    const getShipGrid = () => {
+        return game.getShipGrid();
+    }
+    const processUserInput = (row, col, click) => {
+        
+        if(game.isValidAttack(row, col)){
+            markAttack(click);
+        }
+        game.processUserInput(row, col);
+        //win check
+
+        //get ai target
+        //execute ai attack
+        //update player ship grid to show attack
+        //win check
+    }
+    const initiate = () => {
+        setUpView(game, processUserInput);
+    }
+    
+    return { initiate, processUserInput, getShipGrid };
 }
 
 
-
-initiateSite();
+const site = websiteManagerFactory();
+site.initiate();
 
 
 
 export { 
     shipFactory,
-    gameBoardFactory
+    gameBoardFactory,
+    gameMasterFactory
 };

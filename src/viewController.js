@@ -78,14 +78,41 @@ const displayShips = (shipGrid, table) => {
     }
 }
 
-const setUp = (shipGrid) => {
+const attackGridFactory = (processUserInput) => {
+  let attackGrid = createTable();
+  for(let row = 0; row < 10; row++){
+      for(let col = 0; col < 10; col++){
+          let tableRow = attackGrid.children[row + 1];
+          let cell = tableRow.children[col + 1];
+          //console.log(cell);
+          cell.onclick = (click) => {
+            processUserInput(row, col, click);
+            //console.log(`marking this from onclick ${this}`);
+          }
+      }
+  }
+  return attackGrid;
+
+}
+
+const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
     let table = createTable();
     //console.log(table.children);
     container.appendChild(table);
-    displayShips(shipGrid, table);
+    displayShips(game.getShipGrid(), table);
+    container.appendChild(attackGridFactory(processUserInput));
+}
+
+const markAttack = (click) => {
+  console.log(click.target);
+  let myDiv = document.createElement('div');
+  myDiv.classList.add('hit');
+  myDiv.textContent = 'hit';
+  click.target.appendChild(myDiv);
 }
 
 export { 
-    setUp
+    setUpView,
+    markAttack
 };
