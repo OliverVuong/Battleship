@@ -1,6 +1,10 @@
 import { 
-    gameBoardFactory,
-} from './index';
+    shipGridFactory
+} from './shipGridFactory';
+
+import { 
+    attackGridFactory
+} from './attackGridFactory';
 
 import { 
     computerTargetingAIFactory
@@ -8,60 +12,65 @@ import {
 
 const gameMasterFactory = () => {
 
-    const board_player = gameBoardFactory();
-    const board_computer = gameBoardFactory();
-    board_player.initDefaultShips();
-    board_computer.initDefaultShips();
-    const computerTargetingAI = computerTargetingAIFactory(board_computer);
+    const board_player_ships = shipGridFactory();
+    const board_computer_ships = shipGridFactory();
+
+    const board_player_attacks = attackGridFactory();
+    const board_computer_attacks = attackGridFactory();
+
+    board_player_ships.initDefaultShips();
+    board_computer_ships.initDefaultShips();
+    const computerTargetingAI = computerTargetingAIFactory(board_computer_attacks);
     let attackLocation;
     
     const getShipGrid = () => {
-        return board_player.getShipGrid();
+        return board_player_ships.getShipGrid();
     }
 
     const processUserInput = (row , col) => {
-        console.log(`Valid player attack (${row}, ${col}): ${board_computer.isValidAttack(row, col)}`);
-        if(!board_computer.isValidAttack(row, col)){
+        console.log(`Valid player attack (${row}, ${col}): ${board_player_attacks.isValidAttack(row, col)}`);
+        if(!board_player_attacks.isValidAttack(row, col)){
             return;
         }
-        board_computer.receiveAttack(row, col);
+        board_computer_ships.receiveAttack(row, col);
+        board_player_attacks.recordAttack(row, col);
     }
 
-    const isValidAttack = (row, col) => {
-        return board_computer.isValidAttack(row, col);
+    const isAttackableByPlayer = (row, col) => {
+        return board_player_attacks.isValidAttack(row, col);
     }
 
     const winCheckPlayer = () => {
-        return board_computer.isDefeated();
+        return board_computer_ships.isDefeated();
     }
 
     const winCheckComputer = () => {
-        return board_player.isDefeated();
+        return board_player_ships.isDefeated();
     }
 
-    const isSuccessfulAttack = (row, col, target) => {
-        let board = target === 'computer' ? board_computer : board_player;
-        return board.isSuccessfulAttack(row, col);
+    const isShipPresentAt = (row, col, target) => {
+        let board = target === 'computer' ? board_computer_ships : board_player_ships;
+        return board.isShipPresentAt(row, col);
     }
 
     const processComputerAttack = () => {
         let target = computerTargetingAI.pickTargetSimple();
-        console.log(`Valid computer attack (${target.row}, ${target.col}): ${board_player.isValidAttack(target.row, target.col)}`);
-        if(!board_player.isValidAttack(target.row, target.col)){
+        console.log(`Valid computer attack (${target.row}, ${target.col}): ${board_computer_attacks.isValidAttack(target.row, target.col)}`);
+        if(!board_computer_attacks.isValidAttack(target.row, target.col)){
             console.log('game master: processComputerAttackError');
             return;
         }
-        board_player.receiveAttack(target.row, target.col);
+        board_player_ships.receiveAttack(target.row, target.col);
         return target;
     }
 
     return { 
         getShipGrid, 
         processUserInput, 
-        isValidAttack, 
+        isAttackableByPlayer, 
         winCheckPlayer, 
         winCheckComputer, 
-        isSuccessfulAttack,
+        isShipPresentAt,
         processComputerAttack
     };
 }

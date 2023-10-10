@@ -17,13 +17,13 @@ const websiteManagerFactory = () => {
     }
     const processUserInput = (row, col, click) => {
         
-        if(!game.isValidAttack(row, col)){
+        if(!game.isAttackableByPlayer(row, col)){
             return;
         }
 
         markAttack(click);
 
-        if(game.isSuccessfulAttack(row, col, 'computer')){
+        if(game.isShipPresentAt(row, col, 'computer')){
             console.log('SCUCESS');
             //update console
         }
