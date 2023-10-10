@@ -113,7 +113,30 @@ const markAttack = (click) => {
   click.target.appendChild(myDiv);
 }
 
+const viewController = () => {
+  let shipgridDisplay;
+  const setUpView = (game, processUserInput) => {
+    const container = document.querySelector("#content");
+    shipgridDisplay = createTable();
+    //console.log(shipgridDisplay.children);
+    container.appendChild(shipgridDisplay);
+    displayShips(game.getShipGrid(), shipgridDisplay);
+    container.appendChild(attackGridFactory(processUserInput));
+  }
+  const getShipGridCell = (row, col) => {
+    let tableRow = shipgridDisplay.children[row + 1];
+    let cell = tableRow.children[col + 1];
+    return cell;
+  }
+  const markComputerAttack = (row, col) => {
+    let cell = getShipGridCell(row, col);
+    cell.textContent = 'pch';
+  }
+  return { setUpView, markComputerAttack };
+}
+
 export { 
+    viewController,
     setUpView,
     markAttack
 };

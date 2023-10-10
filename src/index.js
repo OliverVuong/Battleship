@@ -1,4 +1,5 @@
 import { 
+    viewController,
     setUpView,
     markAttack
 } from './viewController';
@@ -213,7 +214,7 @@ const gameMasterFactory = () => {
     }
 
     const processUserInput = (row , col) => {
-        console.log(`Valid attack (${row}, ${col}): ${board_computer.isValidAttack(row, col)}`);
+        console.log(`Valid player attack (${row}, ${col}): ${board_computer.isValidAttack(row, col)}`);
         if(!board_computer.isValidAttack(row, col)){
             return;
         }
@@ -237,6 +238,17 @@ const gameMasterFactory = () => {
         return board.isSuccessfulAttack(row, col);
     }
 
+    const processComputerAttack = () => {
+        let target = computerTargetingAI.pickTargetSimple();
+        console.log(`Valid computer attack (${target.row}, ${target.col}): ${board_player.isValidAttack(target.row, target.col)}`);
+        if(!board_player.isValidAttack(target.row, target.col)){
+            console.log('game master: processComputerAttackError');
+            return;
+        }
+        board_player.receiveAttack(target.row, target.col);
+        return target;
+    }
+
     return { 
         runGameLoop, 
         getShipGrid, 
@@ -244,13 +256,15 @@ const gameMasterFactory = () => {
         isValidAttack, 
         winCheckPlayer, 
         winCheckComputer, 
-        isSuccessfulAttack 
+        isSuccessfulAttack,
+        processComputerAttack
     };
 }
 
 //manages the game and the viewcontroller
 const websiteManagerFactory = () => {
     let game = gameMasterFactory();
+    let myViewController = viewController();
     const getShipGrid = () => {
         return game.getShipGrid();
     }
@@ -278,11 +292,14 @@ const websiteManagerFactory = () => {
 
         //get ai target
         //execute ai attack
+        let target = game.processComputerAttack();
+        console.log(target);
         //update player ship grid to show attack
+        myViewController.markComputerAttack(target.row, target.col);
         //win check
     }
     const initiate = () => {
-        setUpView(game, processUserInput);
+        myViewController.setUpView(game, processUserInput);
     }
     
     return { initiate, processUserInput, getShipGrid };

@@ -14,3 +14,16 @@ body {
         transform: translateY(0);
     }
 }
+
+div, td, tr {
+    margin: 0;
+    padding: 0;
+    border: solid black 1px;
+    max-height: 32px;
+    min-height: 32px;
+}
+
+div, td {
+    max-width: 32px;
+    min-width: 32px;
+}
