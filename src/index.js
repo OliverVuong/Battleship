@@ -1,8 +1,6 @@
 import { 
-    viewController,
-    setUpView,
-    markAttack
-} from './viewController';
+    websiteManagerFactory
+} from './websiteManager';
 import './style.css';
 
 const shipFactory = (len, shipID ='noID', dir = 'south') => {
@@ -261,7 +259,7 @@ const gameMasterFactory = () => {
     };
 }
 
-//manages the game and the viewcontroller
+/*/manages the game and the viewcontroller
 const websiteManagerFactory = () => {
     let game = gameMasterFactory();
     let myViewController = viewController();
@@ -303,7 +301,7 @@ const websiteManagerFactory = () => {
     }
     
     return { initiate, processUserInput, getShipGrid };
-}
+}*/
 
 
 const site = websiteManagerFactory();
