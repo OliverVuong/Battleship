@@ -6,7 +6,7 @@ import {
 
 import { 
     gameMasterFactory,
-} from './index';
+} from './gameMaster';
 
 //manages the game and the viewcontroller
 const websiteManagerFactory = () => {
