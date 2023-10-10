@@ -1,0 +1,16 @@
+body {
+    background-color: lightgray;
+}
+
+.animate {
+    animation: slide-in 0.7s both;
+}
+  
+@keyframes slide-in {
+    0% {
+        transform: translateY(-1000px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

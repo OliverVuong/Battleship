@@ -2,6 +2,7 @@ import {
     setUpView,
     markAttack
 } from './viewController';
+import './style.css';
 
 const shipFactory = (len, shipID ='noID', dir = 'south') => {
     const id = shipID;
@@ -207,6 +208,10 @@ const gameMasterFactory = () => {
 
     const isValidAttack = (row, col) => {
         return board_computer.isValidAttack(row, col);
+    }
+
+    const winCheckPlayer = () => {
+        
     }
 
     return { runGameLoop, getShipGrid, processUserInput, isValidAttack };

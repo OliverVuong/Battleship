@@ -108,6 +108,7 @@ const markAttack = (click) => {
   console.log(click.target);
   let myDiv = document.createElement('div');
   myDiv.classList.add('hit');
+  myDiv.classList.add('animate');
   myDiv.textContent = 'hit';
   click.target.appendChild(myDiv);
 }
