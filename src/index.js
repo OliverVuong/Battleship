@@ -15,9 +15,11 @@ const shipFactory = (len, shipID ='noID', dir = 'south') => {
         return hitsSustained;
     }
     const hit = () => {
+        //console.log('hit');
         hitsSustained++;
         if(hitsSustained === length){
             sunk = true;
+            //console.log('sunk');
         }
     }
     const isSunk = () => {
@@ -144,7 +146,19 @@ const gameBoardFactory = () => {
         return shipGrid;
     }
 
-    return { placeShip, receiveAttack, isValidAttack, isDefeated, initDefaultShips, getShipGrid };
+    const isSuccessfulAttack = (row, col) => {
+        return isValidAttack(row, col) && shipGrid[row][col] != null;
+    }
+
+    return { 
+        placeShip, 
+        receiveAttack, 
+        isValidAttack, 
+        isDefeated, 
+        initDefaultShips, 
+        getShipGrid,
+        isSuccessfulAttack
+    };
 }
 
 const computerTargetingAIFactory = (board) => {
@@ -211,10 +225,27 @@ const gameMasterFactory = () => {
     }
 
     const winCheckPlayer = () => {
-        
+        return board_computer.isDefeated();
     }
 
-    return { runGameLoop, getShipGrid, processUserInput, isValidAttack };
+    const winCheckComputer = () => {
+        return board_player.isDefeated();
+    }
+
+    const isSuccessfulAttack = (row, col, target) => {
+        let board = target === 'computer' ? board_computer : board_player;
+        return board.isSuccessfulAttack(row, col);
+    }
+
+    return { 
+        runGameLoop, 
+        getShipGrid, 
+        processUserInput, 
+        isValidAttack, 
+        winCheckPlayer, 
+        winCheckComputer, 
+        isSuccessfulAttack 
+    };
 }
 
 //manages the game and the viewcontroller
@@ -225,11 +256,25 @@ const websiteManagerFactory = () => {
     }
     const processUserInput = (row, col, click) => {
         
-        if(game.isValidAttack(row, col)){
-            markAttack(click);
+        if(!game.isValidAttack(row, col)){
+            return;
         }
+
+        markAttack(click);
+
+        if(game.isSuccessfulAttack(row, col, 'computer')){
+            console.log('SCUCESS');
+            //update console
+        }
+
         game.processUserInput(row, col);
-        //win check
+
+        //console.log(game.winCheckPlayer());
+        if(game.winCheckPlayer()){
+            //display victory message
+            console.log('player wins');
+            //disable user inputs
+        }
 
         //get ai target
         //execute ai attack
