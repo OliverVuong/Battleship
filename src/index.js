@@ -160,7 +160,7 @@ const gameBoardFactory = () => {
     };
 }
 
-const computerTargetingAIFactory = (board) => {
+/* const computerTargetingAIFactory = (board) => {
     let lastCoordinatesHit;
     let hitShip = false;
     let getRand = () => {
@@ -177,16 +177,13 @@ const computerTargetingAIFactory = (board) => {
     }
 
     return { pickTargetSimple };
-
-}
+} */
 
 const site = websiteManagerFactory();
 site.initiate();
 
 
-
 export { 
     shipFactory,
-    gameBoardFactory,
-    computerTargetingAIFactory
+    gameBoardFactory
 };

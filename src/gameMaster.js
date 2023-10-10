@@ -1,7 +1,10 @@
 import { 
     gameBoardFactory,
-    computerTargetingAIFactory
 } from './index';
+
+import { 
+    computerTargetingAIFactory
+} from './computerTargeting';
 
 const gameMasterFactory = () => {
 
