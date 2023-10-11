@@ -5,6 +5,7 @@ import {
 const shipGridFactory = () => {
     const shipGrid = Array(10).fill().map(() => Array(10).fill(null));
     const shipArr = [];
+    let outcome = '';
 
     const inBounds = (row, col) => {
         return row >= 0 && row < 10 && col >= 0 && col < 10;
@@ -44,11 +45,20 @@ const shipGridFactory = () => {
     }
     
     const receiveAttack = (row, col) => {
+        outcome = '';
         if(shipGrid[row][col]){
             shipGrid[row][col].hit();
-            //console.log(shipGrid[row][col].getID() + " was hit " + 
-            //shipGrid[row][col].getHitsSustained() + " times.");
+            outcome = 'hit';
+            if(shipGrid[row][col].isSunk()){
+                outcome = 'sunk';
+            }
+        } else {
+            outcome = 'miss'
         }
+    }
+
+    const getOutcome = () => {
+        return outcome;
     }
 
     const isDefeated = () => {
@@ -112,7 +122,8 @@ const shipGridFactory = () => {
 
     return { 
         placeShip, 
-        receiveAttack, 
+        receiveAttack,
+        getOutcome,
         isDefeated, 
         initDefaultShips, 
         getShipGrid,

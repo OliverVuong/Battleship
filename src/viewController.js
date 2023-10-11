@@ -115,6 +115,56 @@ const markAttack = (click) => {
 
 const viewController = () => {
   let shipgridDisplay;
+  let msgOne;
+  let msgTwo;
+
+  const setUpMsgDisplay = (parent) => {
+
+    const container = document.createElement('p');
+    container.classList.add('msgDisplay');
+    container.classList.add('container');
+
+    msgOne = document.createElement('p');
+    msgOne.classList.add('msgOne');
+    msgOne.textContent = 'Begin the game by clicking on the right board to select coordinates to fire at';
+
+    msgTwo = document.createElement('p');
+    msgTwo.classList.add('msgTwo');
+    msgTwo.textContent = 'Have fun!'
+
+    parent.appendChild(container);
+    container.appendChild(msgOne);
+    container.appendChild(msgTwo);
+  }
+
+  const updateMsgOne = (row, col, result) => {
+    let msg;
+    if(result === 'miss'){
+      msg = `You fire at (${row}, ${col}) but hit nothing.`;
+    } else if (result === 'hit'){
+      msg = `You fire at (${row}, ${col}) and score a hit.`;
+    } else if (result === 'sunk'){
+      msg = `You fire at (${row}, ${col}), score a hit, and sink a ship.`;
+    } else if (result === 'loss'){
+      msg = `Your opponent has sunk all your ships. You lose the match.`;
+    }
+    msgOne.textContent = msg;
+  }
+
+  const updateMsgTwo = (row, col, result) => {
+    let msg;
+    if(result === 'miss'){
+      msg = `Your opponent fires at (${row}, ${col} but hits nothing.)`;
+    } else if (result === 'hit'){
+      msg = `Your opponent fires at (${row}, ${col}) and scores a hit.`;
+    } else if (result === 'sunk'){
+      msg = `Your opponent fires at (${row}, ${col}), scores a hit, and sinks a ship.`;
+    } else if (result === 'win'){
+      msg = `You have sunk all your opponent's ships and won!`;
+    }
+    msgTwo.textContent = msg;
+  }
+
   const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
     shipgridDisplay = createTable();
@@ -122,6 +172,7 @@ const viewController = () => {
     container.appendChild(shipgridDisplay);
     displayShips(game.getShipGrid(), shipgridDisplay);
     container.appendChild(attackGridFactory(processUserInput));
+    setUpMsgDisplay(container);
   }
   const getShipGridCell = (row, col) => {
     let tableRow = shipgridDisplay.children[row + 1];
@@ -132,11 +183,11 @@ const viewController = () => {
     let cell = getShipGridCell(row, col);
     cell.textContent = 'pch';
   }
-  return { setUpView, markComputerAttack };
+  return { setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
 }
 
 export { 
     viewController,
     setUpView,
-    markAttack
+    markAttack,
 };

@@ -15,7 +15,7 @@ body {
     }
 }
 
-div, td, tr {
+td, tr {
     margin: 0;
     padding: 0;
     border: solid black 1px;
@@ -23,7 +23,7 @@ div, td, tr {
     min-height: 32px;
 }
 
-div, td {
+td {
     max-width: 32px;
     min-width: 32px;
 }
