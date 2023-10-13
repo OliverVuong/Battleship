@@ -1,11 +1,7 @@
 const container = document.querySelector("#content");
 
-const header = document.createElement("head");
-const main = document.createElement("main");
 const footer = document.createElement("footer");
 
-container.appendChild(header);
-container.appendChild(main);
 container.appendChild(footer);
 
 const createCell = (myRow, myCol) => {
@@ -168,8 +164,19 @@ const viewController = () => {
     msgTwo.textContent = msg;
   }
 
+
+  const setUpHeader = (parent) => {
+    let header = document.createElement('header');
+    let title = document.createElement('h1');
+    title.textContent = 'Battleship';
+    header.appendChild(title);
+    parent.appendChild(header);
+    return header;
+  }
+
   const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
+    setUpHeader(container);
     shipgridDisplay = createTable();
     //console.log(shipgridDisplay.children);
     container.appendChild(shipgridDisplay);
