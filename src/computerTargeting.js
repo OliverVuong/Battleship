@@ -8,9 +8,11 @@ const computerTargetingAIFactory = (board) => {
         let row = getRand();
         let col = getRand();
         while(!board.isValidAttack(row, col)){
+            console.log(`(${row}, ${col}) is invalid. Rerolling`)
             row = getRand();
             col = getRand();
         }
+        console.log(`AI final target (${row}, ${col})`);
         return {row, col};
     }
 

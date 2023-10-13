@@ -21,7 +21,14 @@ const websiteManagerFactory = () => {
             return;
         }
 
-        markAttack(click);
+        markAttack(
+            click, 
+            game.isShipPresentAt(
+                click.target.dataset.row, 
+                click.target.dataset.col, 
+                'computer'));
+        //console.log(click);
+        //console.log(click.target.dataset.row);
 /* 
         if(game.isShipPresentAt(row, col, 'computer')){
             console.log('SCUCESS');

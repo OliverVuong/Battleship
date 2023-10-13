@@ -25,7 +25,7 @@ const createTableHeader = (content) => {
 
 const createTopRow = () => {
   let row = document.createElement("tr");
-  row.appendChild(createTableHeader("&nbsp;"));
+  row.appendChild(createTableHeader(""));
   row.appendChild(createTableHeader("A"));
   row.appendChild(createTableHeader("B"));
   row.appendChild(createTableHeader("C"));
@@ -70,7 +70,7 @@ const displayShips = (shipGrid, table) => {
                 let cell = tableRow.children[col + 1];
                 let myDiv = document.createElement("div");
                 myDiv.classList.add("ship")
-                myDiv.textContent = "s";
+                //myDiv.textContent = "s";
                 //cell.textContent = "asdfas";
                 cell.appendChild(myDiv);
             }
@@ -104,12 +104,15 @@ const setUpView = (game, processUserInput) => {
     container.appendChild(attackGridFactory(processUserInput));
 }
 
-const markAttack = (click) => {
+const markAttack = (click, shipPresent) => {
   console.log(click.target);
   let myDiv = document.createElement('div');
   myDiv.classList.add('hit');
   myDiv.classList.add('animate');
-  myDiv.textContent = 'hit';
+  /* myDiv.textContent = 'hit'; */
+  if(shipPresent){
+    myDiv.classList.add('ship');
+  }
   click.target.appendChild(myDiv);
 }
 
@@ -180,8 +183,18 @@ const viewController = () => {
     return cell;
   }
   const markComputerAttack = (row, col) => {
-    let cell = getShipGridCell(row, col);
-    cell.textContent = 'pch';
+    let myTD = getShipGridCell(row, col);
+    //myTD.textContent = 'pch';
+
+    if(myTD.firstChild){
+      myTD.firstChild.classList.add('hit');
+      myTD.firstChild.classList.add('animate');
+    } else {
+      let myDiv = document.createElement('div');
+      myDiv.classList.add('hit');
+      myDiv.classList.add('animate');
+      myTD.appendChild(myDiv);
+    }
   }
   return { setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
 }
