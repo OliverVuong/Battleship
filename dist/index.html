@@ -7,6 +7,337 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="content">
+        <footer></footer>
+        <header>
+           <h1>Battleship</h1>
+        </header>
+        <main>
+           <div class="leftContainer">
+              <div>Your grid.</div>
+              <table>
+                 <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>E</th>
+                    <th>F</th>
+                    <th>G</th>
+                    <th>H</th>
+                    <th>I</th>
+                    <th>J</th>
+                 </tr>
+                 <tr data-row="0">
+                    <th>0</th>
+                    <td class="playerGrid" data-row="0" data-col="0"></td>
+                    <td class="playerGrid" data-row="0" data-col="1"></td>
+                    <td class="playerGrid" data-row="0" data-col="2"></td>
+                    <td class="playerGrid" data-row="0" data-col="3"></td>
+                    <td class="playerGrid" data-row="0" data-col="4"></td>
+                    <td class="playerGrid" data-row="0" data-col="5"></td>
+                    <td class="playerGrid" data-row="0" data-col="6"></td>
+                    <td class="playerGrid" data-row="0" data-col="7"></td>
+                    <td class="playerGrid" data-row="0" data-col="8"></td>
+                    <td class="playerGrid" data-row="0" data-col="9"></td>
+                 </tr>
+                 <tr data-row="1">
+                    <th>1</th>
+                    <td class="playerGrid" data-row="1" data-col="0"></td>
+                    <td class="playerGrid" data-row="1" data-col="1"></td>
+                    <td class="playerGrid" data-row="1" data-col="2"></td>
+                    <td class="playerGrid" data-row="1" data-col="3"></td>
+                    <td class="playerGrid" data-row="1" data-col="4"></td>
+                    <td class="playerGrid" data-row="1" data-col="5"></td>
+                    <td class="playerGrid" data-row="1" data-col="6"></td>
+                    <td class="playerGrid" data-row="1" data-col="7"></td>
+                    <td class="playerGrid" data-row="1" data-col="8"></td>
+                    <td class="playerGrid" data-row="1" data-col="9"></td>
+                 </tr>
+                 <tr data-row="2">
+                    <th>2</th>
+                    <td class="playerGrid" data-row="2" data-col="0"></td>
+                    <td class="playerGrid" data-row="2" data-col="1"></td>
+                    <td class="playerGrid" data-row="2" data-col="2"></td>
+                    <td class="playerGrid" data-row="2" data-col="3"></td>
+                    <td class="playerGrid" data-row="2" data-col="4"></td>
+                    <td class="playerGrid" data-row="2" data-col="5"></td>
+                    <td class="playerGrid" data-row="2" data-col="6"></td>
+                    <td class="playerGrid" data-row="2" data-col="7"></td>
+                    <td class="playerGrid" data-row="2" data-col="8"></td>
+                    <td class="playerGrid" data-row="2" data-col="9"></td>
+                 </tr>
+                 <tr data-row="3">
+                    <th>3</th>
+                    <td class="playerGrid" data-row="3" data-col="0"></td>
+                    <td class="playerGrid" data-row="3" data-col="1"></td>
+                    <td class="playerGrid" data-row="3" data-col="2"></td>
+                    <td class="playerGrid" data-row="3" data-col="3"></td>
+                    <td class="playerGrid" data-row="3" data-col="4"></td>
+                    <td class="playerGrid" data-row="3" data-col="5"></td>
+                    <td class="playerGrid" data-row="3" data-col="6"></td>
+                    <td class="playerGrid" data-row="3" data-col="7"></td>
+                    <td class="playerGrid" data-row="3" data-col="8"></td>
+                    <td class="playerGrid" data-row="3" data-col="9"></td>
+                 </tr>
+                 <tr data-row="4">
+                    <th>4</th>
+                    <td class="playerGrid" data-row="4" data-col="0"></td>
+                    <td class="playerGrid" data-row="4" data-col="1"></td>
+                    <td class="playerGrid" data-row="4" data-col="2"></td>
+                    <td class="playerGrid" data-row="4" data-col="3"></td>
+                    <td class="playerGrid" data-row="4" data-col="4"></td>
+                    <td class="playerGrid" data-row="4" data-col="5"></td>
+                    <td class="playerGrid" data-row="4" data-col="6"></td>
+                    <td class="playerGrid" data-row="4" data-col="7"></td>
+                    <td class="playerGrid" data-row="4" data-col="8"></td>
+                    <td class="playerGrid" data-row="4" data-col="9">
+
+                    </td>
+                 </tr>
+                 <tr data-row="5">
+                    <th>5</th>
+                    <td class="playerGrid" data-row="5" data-col="0"></td>
+                    <td class="playerGrid" data-row="5" data-col="1"></td>
+                    <td class="playerGrid" data-row="5" data-col="2"></td>
+                    <td class="playerGrid" data-row="5" data-col="3"></td>
+                    <td class="playerGrid" data-row="5" data-col="4"></td>
+                    <td class="playerGrid" data-row="5" data-col="5"></td>
+                    <td class="playerGrid" data-row="5" data-col="6"></td>
+                    <td class="playerGrid" data-row="5" data-col="7"></td>
+                    <td class="playerGrid" data-row="5" data-col="8"></td>
+                    <td class="playerGrid" data-row="5" data-col="9"></td>
+                 </tr>
+                 <tr data-row="6">
+                    <th>6</th>
+                    <td class="playerGrid" data-row="6" data-col="0"></td>
+                    <td class="playerGrid" data-row="6" data-col="1"></td>
+                    <td class="playerGrid" data-row="6" data-col="2"></td>
+                    <td class="playerGrid" data-row="6" data-col="3"></td>
+                    <td class="playerGrid" data-row="6" data-col="4"></td>
+                    <td class="playerGrid" data-row="6" data-col="5"></td>
+                    <td class="playerGrid" data-row="6" data-col="6"></td>
+                    <td class="playerGrid" data-row="6" data-col="7"></td>
+                    <td class="playerGrid" data-row="6" data-col="8"></td>
+                    <td class="playerGrid" data-row="6" data-col="9"></td>
+                 </tr>
+                 <tr data-row="7">
+                    <th>7</th>
+                    <td class="playerGrid" data-row="7" data-col="0"></td>
+                    <td class="playerGrid" data-row="7" data-col="1"></td>
+                    <td class="playerGrid" data-row="7" data-col="2"></td>
+                    <td class="playerGrid" data-row="7" data-col="3"></td>
+                    <td class="playerGrid" data-row="7" data-col="4"></td>
+                    <td class="playerGrid" data-row="7" data-col="5"></td>
+                    <td class="playerGrid" data-row="7" data-col="6"></td>
+                    <td class="playerGrid" data-row="7" data-col="7"></td>
+                    <td class="playerGrid" data-row="7" data-col="8"></td>
+                    <td class="playerGrid" data-row="7" data-col="9"></td>
+                 </tr>
+                 <tr data-row="8">
+                    <th>8</th>
+                    <td class="playerGrid" data-row="8" data-col="0"></td>
+                    <td class="playerGrid" data-row="8" data-col="1"></td>
+                    <td class="playerGrid" data-row="8" data-col="2"></td>
+                    <td class="playerGrid" data-row="8" data-col="3"></td>
+                    <td class="playerGrid" data-row="8" data-col="4"></td>
+                    <td class="playerGrid" data-row="8" data-col="5"></td>
+                    <td class="playerGrid" data-row="8" data-col="6"></td>
+                    <td class="playerGrid" data-row="8" data-col="7"></td>
+                    <td class="playerGrid" data-row="8" data-col="8"></td>
+                    <td class="playerGrid" data-row="8" data-col="9"></td>
+                 </tr>
+                 <tr data-row="9">
+                    <th>9</th>
+                    <td class="playerGrid" data-row="9" data-col="0"></td>
+                    <td class="playerGrid" data-row="9" data-col="1"></td>
+                    <td class="playerGrid" data-row="9" data-col="2"></td>
+                    <td class="playerGrid" data-row="9" data-col="3"></td>
+                    <td class="playerGrid" data-row="9" data-col="4"></td>
+                    <td class="playerGrid" data-row="9" data-col="5"></td>
+                    <td class="playerGrid" data-row="9" data-col="6"></td>
+                    <td class="playerGrid" data-row="9" data-col="7"></td>
+                    <td class="playerGrid" data-row="9" data-col="8"></td>
+                    <td class="playerGrid" data-row="9" data-col="9"></td>
+                 </tr>
+              </table>
+           </div>
+           <div class="rightContainer">
+              <div>Opponent's grid.</div>
+              <table class="attackGrid">
+                 <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>E</th>
+                    <th>F</th>
+                    <th>G</th>
+                    <th>H</th>
+                    <th>I</th>
+                    <th>J</th>
+                 </tr>
+                 <tr data-row="0">
+                    <th>0</th>
+                    <td class="playerGrid" data-row="0" data-col="0"></td>
+                    <td class="playerGrid" data-row="0" data-col="1"></td>
+                    <td class="playerGrid" data-row="0" data-col="2"></td>
+                    <td class="playerGrid" data-row="0" data-col="3"></td>
+                    <td class="playerGrid" data-row="0" data-col="4"></td>
+                    <td class="playerGrid" data-row="0" data-col="5"></td>
+                    <td class="playerGrid" data-row="0" data-col="6"></td>
+                    <td class="playerGrid" data-row="0" data-col="7"></td>
+                    <td class="playerGrid" data-row="0" data-col="8"></td>
+                    <td class="playerGrid" data-row="0" data-col="9"></td>
+                 </tr>
+                 <tr data-row="1">
+                    <th>1</th>
+                    <td class="playerGrid" data-row="1" data-col="0"></td>
+                    <td class="playerGrid" data-row="1" data-col="1"></td>
+                    <td class="playerGrid" data-row="1" data-col="2"></td>
+                    <td class="playerGrid" data-row="1" data-col="3"></td>
+                    <td class="playerGrid" data-row="1" data-col="4"></td>
+                    <td class="playerGrid" data-row="1" data-col="5"></td>
+                    <td class="playerGrid" data-row="1" data-col="6"></td>
+                    <td class="playerGrid" data-row="1" data-col="7"></td>
+                    <td class="playerGrid" data-row="1" data-col="8"></td>
+                    <td class="playerGrid" data-row="1" data-col="9"></td>
+                 </tr>
+                 <tr data-row="2">
+                    <th>2</th>
+                    <td class="playerGrid" data-row="2" data-col="0"></td>
+                    <td class="playerGrid" data-row="2" data-col="1"></td>
+                    <td class="playerGrid" data-row="2" data-col="2"></td>
+                    <td class="playerGrid" data-row="2" data-col="3"></td>
+                    <td class="playerGrid" data-row="2" data-col="4"></td>
+                    <td class="playerGrid" data-row="2" data-col="5"></td>
+                    <td class="playerGrid" data-row="2" data-col="6"></td>
+                    <td class="playerGrid" data-row="2" data-col="7"></td>
+                    <td class="playerGrid" data-row="2" data-col="8"></td>
+                    <td class="playerGrid" data-row="2" data-col="9"></td>
+                 </tr>
+                 <tr data-row="3">
+                    <th>3</th>
+                    <td class="playerGrid" data-row="3" data-col="0"></td>
+                    <td class="playerGrid" data-row="3" data-col="1"></td>
+                    <td class="playerGrid" data-row="3" data-col="2"></td>
+                    <td class="playerGrid" data-row="3" data-col="3"></td>
+                    <td class="playerGrid" data-row="3" data-col="4"></td>
+                    <td class="playerGrid" data-row="3" data-col="5"></td>
+                    <td class="playerGrid" data-row="3" data-col="6"></td>
+                    <td class="playerGrid" data-row="3" data-col="7"></td>
+                    <td class="playerGrid" data-row="3" data-col="8"></td>
+                    <td class="playerGrid" data-row="3" data-col="9"></td>
+                 </tr>
+                 <tr data-row="4">
+                    <th>4</th>
+                    <td class="playerGrid" data-row="4" data-col="0"></td>
+                    <td class="playerGrid" data-row="4" data-col="1"></td>
+                    <td class="playerGrid" data-row="4" data-col="2"></td>
+                    <td class="playerGrid" data-row="4" data-col="3"></td>
+                    <td class="playerGrid" data-row="4" data-col="4"></td>
+                    <td class="playerGrid" data-row="4" data-col="5"></td>
+                    <td class="playerGrid" data-row="4" data-col="6"></td>
+                    <td class="playerGrid" data-row="4" data-col="7"></td>
+                    <td class="playerGrid" data-row="4" data-col="8"></td>
+                    <td class="playerGrid" data-row="4" data-col="9"></td>
+                 </tr>
+                 <tr data-row="5">
+                    <th>5</th>
+                    <td class="playerGrid" data-row="5" data-col="0"></td>
+                    <td class="playerGrid" data-row="5" data-col="1"></td>
+                    <td class="playerGrid" data-row="5" data-col="2"></td>
+                    <td class="playerGrid" data-row="5" data-col="3"></td>
+                    <td class="playerGrid" data-row="5" data-col="4"></td>
+                    <td class="playerGrid" data-row="5" data-col="5"></td>
+                    <td class="playerGrid" data-row="5" data-col="6"></td>
+                    <td class="playerGrid" data-row="5" data-col="7"></td>
+                    <td class="playerGrid" data-row="5" data-col="8"></td>
+                    <td class="playerGrid" data-row="5" data-col="9"></td>
+                 </tr>
+                 <tr data-row="6">
+                    <th>6</th>
+                    <td class="playerGrid" data-row="6" data-col="0"></td>
+                    <td class="playerGrid" data-row="6" data-col="1"></td>
+                    <td class="playerGrid" data-row="6" data-col="2"></td>
+                    <td class="playerGrid" data-row="6" data-col="3"></td>
+                    <td class="playerGrid" data-row="6" data-col="4"></td>
+                    <td class="playerGrid" data-row="6" data-col="5"></td>
+                    <td class="playerGrid" data-row="6" data-col="6"></td>
+                    <td class="playerGrid" data-row="6" data-col="7"></td>
+                    <td class="playerGrid" data-row="6" data-col="8"></td>
+                    <td class="playerGrid" data-row="6" data-col="9"></td>
+                 </tr>
+                 <tr data-row="7">
+                    <th>7</th>
+                    <td class="playerGrid" data-row="7" data-col="0"></td>
+                    <td class="playerGrid" data-row="7" data-col="1"></td>
+                    <td class="playerGrid" data-row="7" data-col="2"></td>
+                    <td class="playerGrid" data-row="7" data-col="3"></td>
+                    <td class="playerGrid" data-row="7" data-col="4"></td>
+                    <td class="playerGrid" data-row="7" data-col="5"></td>
+                    <td class="playerGrid" data-row="7" data-col="6"></td>
+                    <td class="playerGrid" data-row="7" data-col="7"></td>
+                    <td class="playerGrid" data-row="7" data-col="8"></td>
+                    <td class="playerGrid" data-row="7" data-col="9"></td>
+                 </tr>
+                 <tr data-row="8">
+                    <th>8</th>
+                    <td class="playerGrid" data-row="8" data-col="0"></td>
+                    <td class="playerGrid" data-row="8" data-col="1"></td>
+                    <td class="playerGrid" data-row="8" data-col="2"></td>
+                    <td class="playerGrid" data-row="8" data-col="3"></td>
+                    <td class="playerGrid" data-row="8" data-col="4"></td>
+                    <td class="playerGrid" data-row="8" data-col="5"></td>
+                    <td class="playerGrid" data-row="8" data-col="6"></td>
+                    <td class="playerGrid" data-row="8" data-col="7"></td>
+                    <td class="playerGrid" data-row="8" data-col="8"></td>
+                    <td class="playerGrid" data-row="8" data-col="9"></td>
+                 </tr>
+                 <tr data-row="9">
+                    <th>9</th>
+                    <td class="playerGrid" data-row="9" data-col="0"></td>
+                    <td class="playerGrid" data-row="9" data-col="1"></td>
+                    <td class="playerGrid" data-row="9" data-col="2"></td>
+                    <td class="playerGrid" data-row="9" data-col="3"></td>
+                    <td class="playerGrid" data-row="9" data-col="4"></td>
+                    <td class="playerGrid" data-row="9" data-col="5"></td>
+                    <td class="playerGrid" data-row="9" data-col="6"></td>
+                    <td class="playerGrid" data-row="9" data-col="7"></td>
+                    <td class="playerGrid" data-row="9" data-col="8"></td>
+                    <td class="playerGrid" data-row="9" data-col="9"></td>
+                 </tr>
+              </table>
+           </div>
+        </main>
+        <div class="buttonContainer">
+           <div class="dropDownContainer">
+              <label>Chose a ship</label>
+              <select name="ship-selector" id="ship-selector">
+                 <option value="Ship1">Ship 1</option>
+                 <option value="Ship2">Ship 2</option>
+                 <option value="Ship3">Ship 3</option>
+                 <option value="Ship4">Ship 4</option>
+                 <option value="Ship5">Ship 5</option>
+                 <option value="Ship6">Ship 6</option>
+                 <option value="Ship7">Ship 7</option>
+                 <option value="Ship8">Ship 8</option>
+                 <option value="Ship9">Ship 9</option>
+                 <option value="Ship10">Ship 10</option>
+              </select>
+           </div>
+           <div class="buttonsContainer"><button class="up">Up</button><button class="left">Left</button><button class="down">Down</button><button class="right">Right</button><button class="rotate">Rotate</button><button class="start">Start</button></div>
+           <div class="errorContainer">
+              <p class="errorText">Error goes here, otherwise blank</p>
+           </div>
+        </div>
+        <p class="msgDisplay container">
+        <p class="msgOne">Begin the game by clicking on the right board to select coordinates to fire at</p>
+        <p class="msgTwo">Have fun!</p>
+        </p>
+     </div>
+     
 </body>
 </html>

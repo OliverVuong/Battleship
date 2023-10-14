@@ -1,6 +1,6 @@
 import { 
     viewController,
-    setUpView,
+    /* setUpView, */
     markAttack
 } from './viewController';
 

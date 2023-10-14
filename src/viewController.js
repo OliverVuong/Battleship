@@ -78,31 +78,28 @@ const displayShips = (shipGrid, table) => {
     }
 }
 
-const attackGridFactory = (processUserInput) => {
-  let attackGrid = createTable();
+const makeAttackGridClickable = (attackGrid, processUserInput) => {
+  let tbody = attackGrid.children[0];
   for(let row = 0; row < 10; row++){
       for(let col = 0; col < 10; col++){
-          let tableRow = attackGrid.children[row + 1];
+          let tableRow = tbody.children[row + 1];
           let cell = tableRow.children[col + 1];
-          //console.log(cell);
           cell.onclick = (click) => {
             processUserInput(row, col, click);
             //console.log(`marking this from onclick ${this}`);
           }
       }
   }
-  return attackGrid;
-
 }
 
-const setUpView = (game, processUserInput) => {
+/* const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
     let table = createTable();
     //console.log(table.children);
     container.appendChild(table);
     displayShips(game.getShipGrid(), table);
     container.appendChild(attackGridFactory(processUserInput));
-}
+} */
 
 const markAttack = (click, shipPresent) => {
   console.log(click.target);
@@ -179,28 +176,8 @@ const viewController = () => {
   }
 
   const setUpMain = (container, game, processUserInput) => {
-    const main = document.createElement('main');
-    container.appendChild(main);
-
-    const leftContainer = document.createElement('div');
-    leftContainer.classList.add('leftContainer');
-    const rightContainer = document.createElement('div');
-    rightContainer.classList.add('rightContainer');
-
-    main.appendChild(leftContainer);
-    main.appendChild(rightContainer);
-
-    const leftTitle = document.createElement('div');
-    leftTitle.textContent = 'Your grid.';
-    shipgridDisplay = createTable();
-    leftContainer.appendChild(leftTitle);
-    leftContainer.appendChild(shipgridDisplay);
-    displayShips(game.getShipGrid(), shipgridDisplay);
-
-    const rightTitle = document.createElement('div');
-    rightTitle.textContent = "Opponent's grid."
-    rightContainer.appendChild(rightTitle);
-    rightContainer.appendChild(attackGridFactory(processUserInput));
+    let attackGrid = document.querySelector('.attackGrid');
+    makeAttackGridClickable(attackGrid, processUserInput);
   }
 
   const setUpView = (game, processUserInput) => {
@@ -234,6 +211,6 @@ const viewController = () => {
 
 export { 
     viewController,
-    setUpView,
+    /* setUpView, */
     markAttack,
 };
