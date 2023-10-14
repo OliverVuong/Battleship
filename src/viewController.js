@@ -1,64 +1,3 @@
-import {
-  setupButtonSuite
-} from './buttonSuite';
-
-const container = document.querySelector("#content");
-
-const footer = document.createElement("footer");
-
-container.appendChild(footer);
-
-const createCell = (myRow, myCol) => {
-  let output = document.createElement("td");
-  output.classList.add("playerGrid");
-  output.dataset.row = myRow;
-  output.dataset.col = myCol;
-  return output
-}
-
-
-const createTableHeader = (content) => {
-  let output = document.createElement("th");
-  output.textContent = content;
-  return output;
-}
-
-const createTopRow = () => {
-  let row = document.createElement("tr");
-  row.appendChild(createTableHeader(""));
-  row.appendChild(createTableHeader("A"));
-  row.appendChild(createTableHeader("B"));
-  row.appendChild(createTableHeader("C"));
-  row.appendChild(createTableHeader("D"));
-  row.appendChild(createTableHeader("E"));
-  row.appendChild(createTableHeader("F"));
-  row.appendChild(createTableHeader("G"));
-  row.appendChild(createTableHeader("H"));
-  row.appendChild(createTableHeader("I"));
-  row.appendChild(createTableHeader("J"));
-  return row;
-}
-
-const createRow = (rowNumber) => {
-  let row = document.createElement("tr");
-  row.dataset.row = rowNumber;
-  row.appendChild(createTableHeader(rowNumber));
-  for(let col = 0; col < 10; col++){
-    row.appendChild(createCell(rowNumber, col));
-  }
-  return row;
-}
-
-const createTable = () => {
-  const myTable = document.createElement("table");
-  myTable.appendChild(createTopRow());
-  for(let row = 0; row < 10; row++){
-    myTable.appendChild(createRow(row));
-  }
-
-  return myTable;
-}
-
 const displayShips = (shipGrid, table) => {
     for(let row = 0; row < 10; row++){
         for(let col = 0; col < 10; col++){
@@ -78,8 +17,7 @@ const displayShips = (shipGrid, table) => {
     }
 }
 
-const makeAttackGridClickable = (attackGrid, processUserInput) => {
-  let tbody = attackGrid.children[0];
+const makeAttackGridClickable = (tbody, processUserInput) => {
   for(let row = 0; row < 10; row++){
       for(let col = 0; col < 10; col++){
           let tableRow = tbody.children[row + 1];
@@ -92,21 +30,11 @@ const makeAttackGridClickable = (attackGrid, processUserInput) => {
   }
 }
 
-/* const setUpView = (game, processUserInput) => {
-    const container = document.querySelector("#content");
-    let table = createTable();
-    //console.log(table.children);
-    container.appendChild(table);
-    displayShips(game.getShipGrid(), table);
-    container.appendChild(attackGridFactory(processUserInput));
-} */
-
 const markAttack = (click, shipPresent) => {
   console.log(click.target);
   let myDiv = document.createElement('div');
   myDiv.classList.add('hit');
   myDiv.classList.add('animate');
-  /* myDiv.textContent = 'hit'; */
   if(shipPresent){
     myDiv.classList.add('ship');
   }
@@ -114,28 +42,9 @@ const markAttack = (click, shipPresent) => {
 }
 
 const viewController = () => {
-  let shipgridDisplay;
+  let shipTBody;
   let msgOne;
   let msgTwo;
-
-  const setUpMsgDisplay = (parent) => {
-
-    const container = document.createElement('p');
-    container.classList.add('msgDisplay');
-    container.classList.add('container');
-
-    msgOne = document.createElement('p');
-    msgOne.classList.add('msgOne');
-    msgOne.textContent = 'Begin the game by clicking on the right board to select coordinates to fire at';
-
-    msgTwo = document.createElement('p');
-    msgTwo.classList.add('msgTwo');
-    msgTwo.textContent = 'Have fun!'
-
-    parent.appendChild(container);
-    container.appendChild(msgOne);
-    container.appendChild(msgTwo);
-  }
 
   const updateMsgOne = (row, col, result) => {
     let msg;
@@ -165,36 +74,27 @@ const viewController = () => {
     msgTwo.textContent = msg;
   }
 
-
-  const setUpHeader = (parent) => {
-    let header = document.createElement('header');
-    let title = document.createElement('h1');
-    title.textContent = 'Battleship';
-    header.appendChild(title);
-    parent.appendChild(header);
-    return header;
-  }
-
   const setUpMain = (container, game, processUserInput) => {
+    shipTBody = document.querySelector('.shipGrid');
     let attackGrid = document.querySelector('.attackGrid');
+    displayShips(game.getShipGrid(), shipTBody)
     makeAttackGridClickable(attackGrid, processUserInput);
   }
 
   const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
-    setUpHeader(container);
+    msgOne = document.querySelector('.msgOne');
+    msgTwo = document.querySelector('.msgTwo');
+    
     setUpMain(container, game, processUserInput);
-    setupButtonSuite(container);
-    setUpMsgDisplay(container);
   }
   const getShipGridCell = (row, col) => {
-    let tableRow = shipgridDisplay.children[row + 1];
+    let tableRow = shipTBody.children[row + 1];
     let cell = tableRow.children[col + 1];
     return cell;
   }
   const markComputerAttack = (row, col) => {
     let myTD = getShipGridCell(row, col);
-    //myTD.textContent = 'pch';
 
     if(myTD.firstChild){
       myTD.firstChild.classList.add('hit');
@@ -211,6 +111,5 @@ const viewController = () => {
 
 export { 
     viewController,
-    /* setUpView, */
     markAttack,
 };
