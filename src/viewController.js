@@ -1,3 +1,7 @@
+import {
+  setupButtonSuite
+} from './buttonSuite';
+
 const container = document.querySelector("#content");
 
 const footer = document.createElement("footer");
@@ -153,7 +157,7 @@ const viewController = () => {
   const updateMsgTwo = (row, col, result) => {
     let msg;
     if(result === 'miss'){
-      msg = `Your opponent fires at (${row}, ${col} but hits nothing.)`;
+      msg = `Your opponent fires at (${row}, ${col}) but hits nothing.`;
     } else if (result === 'hit'){
       msg = `Your opponent fires at (${row}, ${col}) and scores a hit.`;
     } else if (result === 'sunk'){
@@ -174,14 +178,36 @@ const viewController = () => {
     return header;
   }
 
+  const setUpMain = (container, game, processUserInput) => {
+    const main = document.createElement('main');
+    container.appendChild(main);
+
+    const leftContainer = document.createElement('div');
+    leftContainer.classList.add('leftContainer');
+    const rightContainer = document.createElement('div');
+    rightContainer.classList.add('rightContainer');
+
+    main.appendChild(leftContainer);
+    main.appendChild(rightContainer);
+
+    const leftTitle = document.createElement('div');
+    leftTitle.textContent = 'Your grid.';
+    shipgridDisplay = createTable();
+    leftContainer.appendChild(leftTitle);
+    leftContainer.appendChild(shipgridDisplay);
+    displayShips(game.getShipGrid(), shipgridDisplay);
+
+    const rightTitle = document.createElement('div');
+    rightTitle.textContent = "Opponent's grid."
+    rightContainer.appendChild(rightTitle);
+    rightContainer.appendChild(attackGridFactory(processUserInput));
+  }
+
   const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
     setUpHeader(container);
-    shipgridDisplay = createTable();
-    //console.log(shipgridDisplay.children);
-    container.appendChild(shipgridDisplay);
-    displayShips(game.getShipGrid(), shipgridDisplay);
-    container.appendChild(attackGridFactory(processUserInput));
+    setUpMain(container, game, processUserInput);
+    setupButtonSuite(container);
     setUpMsgDisplay(container);
   }
   const getShipGridCell = (row, col) => {
