@@ -52,7 +52,11 @@ const viewController = () => {
   let gameMaster;
 
   const clearExistingHighlights = () => {
-
+    for(let row = 0; row < 10; row++){
+      for(let col = 0; col < 10; col++){
+        getTableCell(row, col).classList.remove('selected');
+      }
+    }
   }
 
   const createHighlighting = (shipGridWrapper) => {
@@ -154,17 +158,8 @@ const viewController = () => {
       myTD.classList.add('miss');
     }
     myTD.classList.add('animate')
-
-    /* if(myTD.firstChild){
-      myTD.firstChild.classList.add('hit');
-      myTD.firstChild.classList.add('animate');
-    } else {
-      let myDiv = document.createElement('div');
-      myDiv.classList.add('hit');
-      myDiv.classList.add('animate');
-      myTD.appendChild(myDiv);
-    } */
   }
+
   return { setUp, setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
 }
 

@@ -45,7 +45,6 @@ const shipGridFactory = () => {
             row = row + (rowMod);
             col = col + (colMod);
         }
-        console.log(shipLocations[ship.getID()]);
     }
     
     const getShipLocation = (shipID) => {
