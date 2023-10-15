@@ -5,6 +5,7 @@ import {
 const shipGridFactory = () => {
     const shipGrid = Array(10).fill().map(() => Array(10).fill(null));
     const shipArr = [];
+    const shipLocations = {};
     let outcome = '';
 
     const inBounds = (row, col) => {
@@ -34,14 +35,20 @@ const shipGridFactory = () => {
         }
 
         shipArr.push(ship);
+        shipLocations[ship.getID()] = [];
+
         let rowMod = ship.getDirection() === 'south' ? 1 : 0;
         let colMod = ship.getDirection() === 'east' ? 1 : 0;
         for(let i = 0; i < ship.getLength(); i++){
             shipGrid[row][col] = ship;
             row = row + (rowMod);
             col = col + (colMod);
+            shipLocations[ship.getID()].push({row, col});
         }
-        
+    }
+    
+    const getShipLocation = (shipID) => {
+        return shipLocations[shipID];
     }
     
     const receiveAttack = (row, col) => {
@@ -122,6 +129,7 @@ const shipGridFactory = () => {
 
     return { 
         placeShip, 
+        getShipLocation,
         receiveAttack,
         getOutcome,
         isDefeated, 
