@@ -43,8 +43,48 @@ const markAttack = (click, shipPresent) => {
 
 const viewController = () => {
   let shipTBody;
+  let attackGrid;
   let msgOne;
   let msgTwo;
+  let shipSelector;
+
+  const clearExistingHighlights = () => {
+
+  }
+
+  const createHighlighting = (shipGridWrapper) => {
+    shipSelector.onchange = (event) => {
+      clearExistingHighlights();
+
+
+      let shipID = shipSelector.value;
+      let coordinates = shipGridWrapper.getShipLocation(shipID);
+      for(let coord of coordinates){
+        console.log('coords:');
+        console.log(coord);/////////
+        let myTD = getTableCell(coord.row, coord.col);
+        console.log('myTD');
+        console.log(myTD);/////////
+        myTD.classList.add('selected')
+      }
+      getTableCell
+    }
+  }
+
+  const loadButtonFunctionality = (processUserInput, shipGrid) => {
+
+    makeAttackGridClickable(attackGrid, processUserInput);
+    createHighlighting(shipGrid);
+  }
+
+  const loadElements = () => {
+    shipTBody = document.querySelector('.shipGrid');
+    attackGrid = document.querySelector('.attackGrid');
+    msgOne = document.querySelector('.msgOne');
+    msgTwo = document.querySelector('.msgTwo');
+    shipSelector = document.querySelector('#ship-selector');
+    createHighlighting();
+  }
 
   const updateMsgOne = (row, col, result) => {
     let msg;
@@ -75,26 +115,30 @@ const viewController = () => {
   }
 
   const setUpMain = (container, game, processUserInput) => {
-    shipTBody = document.querySelector('.shipGrid');
-    let attackGrid = document.querySelector('.attackGrid');
+    /* shipTBody = document.querySelector('.shipGrid');
+    attackGrid = document.querySelector('.attackGrid'); */
     displayShips(game.getShipGrid(), shipTBody)
-    makeAttackGridClickable(attackGrid, processUserInput);
+    /* makeAttackGridClickable(attackGrid, processUserInput); */
   }
 
   const setUpView = (game, processUserInput) => {
     const container = document.querySelector("#content");
-    msgOne = document.querySelector('.msgOne');
-    msgTwo = document.querySelector('.msgTwo');
     
     setUpMain(container, game, processUserInput);
   }
-  const getShipGridCell = (row, col) => {
+
+  const setUp = (game, processUserInput) => {
+    loadElements();
+    loadButtonFunctionality(processUserInput, game.getShipGridWrapper());
+    setUpView(game, processUserInput);
+  }
+  const getTableCell = (row, col) => {
     let tableRow = shipTBody.children[row + 1];
     let cell = tableRow.children[col + 1];
     return cell;
   }
   const markComputerAttack = (row, col) => {
-    let myTD = getShipGridCell(row, col);
+    let myTD = getTableCell(row, col);
 
     if(myTD.firstChild){
       myTD.firstChild.classList.add('hit');
@@ -106,7 +150,7 @@ const viewController = () => {
       myTD.appendChild(myDiv);
     }
   }
-  return { setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
+  return { setUp, setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
 }
 
 export { 

@@ -30,6 +30,10 @@ const gameMasterFactory = () => {
         return board_player_ships.getShipGrid();
     }
 
+    const getShipGridWrapper = () => {
+        return board_player_ships;
+    }
+
     const processUserInput = (row , col) => {
         //console.log(`Valid player attack (${row}, ${col}): ${board_player_attacks.isValidAttack(row, col)}`);
         if(!board_player_attacks.isValidAttack(row, col)){
@@ -80,6 +84,7 @@ const gameMasterFactory = () => {
 
     return { 
         getShipGrid, 
+        getShipGridWrapper,
         processUserInput, 
         isAttackableByPlayer, 
         winCheckPlayer, 

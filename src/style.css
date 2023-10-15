@@ -54,3 +54,7 @@ div.hit.ship {
     border: 5px solid blue;
     box-sizing: border-box;
 }
+
+td.selected {
+    background-color: pink;
+}

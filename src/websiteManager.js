@@ -68,7 +68,7 @@ const websiteManagerFactory = () => {
         
     }
     const initiate = () => {
-        myViewController.setUpView(game, processUserInput);
+        myViewController.setUp(game, processUserInput);
     }
     
     return { initiate, processUserInput, getShipGrid };
