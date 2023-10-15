@@ -52,6 +52,18 @@ div.hit {
 
 div.hit.ship {
     border: 5px solid blue;
+}
+
+td.ship {
+    background-color: blue;
+}
+
+td.miss, td.hit {
+    background-color: red;
+}
+
+td.hit {
+    border: 5px solid blue;
     box-sizing: border-box;
 }
 

@@ -7,11 +7,11 @@ const displayShips = (shipGrid, table) => {
                 //console.log('hello');
                 //console.log(tableRow);
                 let cell = tableRow.children[col + 1];
-                let myDiv = document.createElement("div");
-                myDiv.classList.add("ship")
+                //cell = document.createElement("div");
+                cell.classList.add("ship")
                 //myDiv.textContent = "s";
                 //cell.textContent = "asdfas";
-                cell.appendChild(myDiv);
+                //cell.appendChild(myDiv);
             }
         }
     }
@@ -32,13 +32,15 @@ const makeAttackGridClickable = (tbody, processUserInput) => {
 
 const markAttack = (click, shipPresent) => {
   console.log(click.target);
-  let myDiv = document.createElement('div');
-  myDiv.classList.add('hit');
-  myDiv.classList.add('animate');
+  let myTD = click.target;
+  /* let myDiv = document.createElement('div'); */
+  myTD.classList.add('animate');
   if(shipPresent){
-    myDiv.classList.add('ship');
+    myTD.classList.add('hit');
+  } else {
+    myTD.classList.add('miss');
   }
-  click.target.appendChild(myDiv);
+  /* click.target.appendChild(myDiv); */
 }
 
 const viewController = () => {
@@ -47,6 +49,7 @@ const viewController = () => {
   let msgOne;
   let msgTwo;
   let shipSelector;
+  let gameMaster;
 
   const clearExistingHighlights = () => {
 
@@ -84,6 +87,10 @@ const viewController = () => {
     msgTwo = document.querySelector('.msgTwo');
     shipSelector = document.querySelector('#ship-selector');
     createHighlighting();
+  }
+
+  const loadGameMaster = (game) => {
+    gameMaster = game;
   }
 
   const updateMsgOne = (row, col, result) => {
@@ -130,6 +137,7 @@ const viewController = () => {
   const setUp = (game, processUserInput) => {
     loadElements();
     loadButtonFunctionality(processUserInput, game.getShipGridWrapper());
+    loadGameMaster(game);
     setUpView(game, processUserInput);
   }
   const getTableCell = (row, col) => {
@@ -140,7 +148,14 @@ const viewController = () => {
   const markComputerAttack = (row, col) => {
     let myTD = getTableCell(row, col);
 
-    if(myTD.firstChild){
+    if(gameMaster.isShipPresentAt(row, col, 'player')){
+      myTD.classList.add('hit');
+    } else {
+      myTD.classList.add('miss');
+    }
+    myTD.classList.add('animate')
+
+    /* if(myTD.firstChild){
       myTD.firstChild.classList.add('hit');
       myTD.firstChild.classList.add('animate');
     } else {
@@ -148,7 +163,7 @@ const viewController = () => {
       myDiv.classList.add('hit');
       myDiv.classList.add('animate');
       myTD.appendChild(myDiv);
-    }
+    } */
   }
   return { setUp, setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
 }
