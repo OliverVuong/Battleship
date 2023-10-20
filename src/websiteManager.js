@@ -67,6 +67,7 @@ const websiteManagerFactory = () => {
         }
         
     }
+
     const initiate = () => {
         myViewController.setUp(game, processUserInput);
     }

@@ -1,9 +1,13 @@
 import { 
-    gameBoardFactory, shipFactory
-} from '../index';
+    shipGridFactory
+} from '../shipGridFactory';
+
+import { 
+    shipFactory
+} from '../shipFactory';
 
 describe('place single ship', () => {
-    let myBoard = gameBoardFactory();
+    let myBoard = shipGridFactory();
     let myShip = shipFactory(1, 'testShip', 'south');
     myBoard.placeShip(myShip, 0, 0);
 
@@ -13,7 +17,7 @@ describe('place single ship', () => {
 })
 
 describe('destroy single ship', () => {
-    let myBoard = gameBoardFactory();
+    let myBoard = shipGridFactory();
     let myShip = shipFactory(1, 'testShip', 'south');
     myBoard.placeShip(myShip, 0, 0);
     myBoard.receiveAttack(0, 0);
@@ -24,7 +28,7 @@ describe('destroy single ship', () => {
 })
 
 describe('place double ship', () => {
-    let myBoard = gameBoardFactory();
+    let myBoard = shipGridFactory();
     let myShip = shipFactory(2, 'testShip', 'south');
     myBoard.placeShip(myShip, 3, 1);
 
@@ -34,7 +38,7 @@ describe('place double ship', () => {
 })
 
 describe('hit double ship once', () => {
-    let myBoard = gameBoardFactory();
+    let myBoard = shipGridFactory();
     let myShip = shipFactory(2, 'testShip', 'south');
     myBoard.placeShip(myShip, 3, 1);
     myBoard.receiveAttack(3, 1);
@@ -45,7 +49,7 @@ describe('hit double ship once', () => {
 })
 
 describe('sink double ship', () => {
-    let myBoard = gameBoardFactory();
+    let myBoard = shipGridFactory();
     let myShip = shipFactory(2, 'testShip', 'south');
     myBoard.placeShip(myShip, 3, 1);
     myBoard.receiveAttack(3, 1);
@@ -58,7 +62,7 @@ describe('sink double ship', () => {
 
 describe('placing a ship eastwards/horizontally', () => {
     describe('place triple ship', () => {
-        let myBoard = gameBoardFactory();
+        let myBoard = shipGridFactory();
         let myShip = shipFactory(3, 'testShip', 'east');
         myBoard.placeShip(myShip, 7, 3);
         test('ship is not hit and player is not defeated', () => {
@@ -67,7 +71,7 @@ describe('placing a ship eastwards/horizontally', () => {
     })
 
     describe('hit triple ship once', () => {
-        let myBoard = gameBoardFactory();
+        let myBoard = shipGridFactory();
         let myShip = shipFactory(3, 'testShip', 'east');
         myBoard.placeShip(myShip, 7, 3);
         myBoard.receiveAttack(7, 3);
@@ -77,7 +81,7 @@ describe('placing a ship eastwards/horizontally', () => {
     })
 
     describe('hit triple ship twice', () => {
-        let myBoard = gameBoardFactory();
+        let myBoard = shipGridFactory();
         let myShip = shipFactory(3, 'testShip', 'east');
         myBoard.placeShip(myShip, 7, 3);
         myBoard.receiveAttack(7, 3);
@@ -88,7 +92,7 @@ describe('placing a ship eastwards/horizontally', () => {
     })
 
     describe('sink triple ship', () => {
-        let myBoard = gameBoardFactory();
+        let myBoard = shipGridFactory();
         let myShip = shipFactory(3, 'testShip', 'east');
         myBoard.placeShip(myShip, 7, 3);
         myBoard.receiveAttack(7, 3);

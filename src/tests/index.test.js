@@ -1,6 +1,6 @@
 import { 
     shipFactory
-} from '../index';
+} from '../shipFactory';
 
 let testShipA;
 let testShipB;

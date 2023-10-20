@@ -122,6 +122,14 @@ const shipGridFactory = () => {
     const getShipGrid = () => {
         return shipGrid;
     }
+
+    const getShipArr = () => {
+        return shipArr;
+    }
+
+    const getShipLocations = () => {
+        return shipLocations;
+    }
     
     const isShipPresentAt = (row, col) => {
         return shipGrid[row][col] != null;
@@ -135,6 +143,8 @@ const shipGridFactory = () => {
         isDefeated, 
         initDefaultShips, 
         getShipGrid,
+        getShipArr,
+        getShipLocations,
         isShipPresentAt
     };
 }

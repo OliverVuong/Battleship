@@ -1,18 +1,18 @@
 import { 
-    gameBoardFactory
-} from '../index';
+    shipGridFactory
+} from '../shipGridFactory';
 
 describe('gameboard', () => {
     
     let myBoard;
 
     beforeAll(() => {
-        myBoard = gameBoardFactory();
+        myBoard = shipGridFactory();
         myBoard.initDefaultShips();
-        myBoard.receiveAttack(0, 3);
         myBoard.receiveAttack(0, 4);
         myBoard.receiveAttack(0, 5);
         myBoard.receiveAttack(0, 6);
+        myBoard.receiveAttack(0, 7);
 
         myBoard.receiveAttack(0, 9);
         myBoard.receiveAttack(1, 9);
@@ -40,7 +40,7 @@ describe('gameboard', () => {
         myBoard.receiveAttack(9, 9);
     });
 
-    xit('valid attack on empty space', () => {
+    it('valid attack on empty space', () => {
         expect(myBoard.isDefeated()).toBe(true);
     })
 })

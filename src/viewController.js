@@ -84,6 +84,12 @@ const viewController = () => {
     createHighlighting(shipGrid);
   }
 
+  const loadMovementButtonFunctionality = () => {
+    buttonSuite.up.onclick = () => {
+      gameMaster.moveShip(shipSelector.value, 'up');
+    }
+  }
+
   const loadElements = () => {
     shipTBody = document.querySelector('.shipGrid');
     attackGrid = document.querySelector('.attackGrid');
@@ -140,8 +146,9 @@ const viewController = () => {
 
   const setUp = (game, processUserInput) => {
     loadElements();
-    loadButtonFunctionality(processUserInput, game.getShipGridWrapper());
     loadGameMaster(game);
+    loadButtonFunctionality(processUserInput, game.getShipGridWrapper());
+    loadMovementButtonFunctionality();
     setUpView(game, processUserInput);
   }
   const getTableCell = (row, col) => {
@@ -160,7 +167,27 @@ const viewController = () => {
     myTD.classList.add('animate')
   }
 
-  return { setUp, setUpView, markComputerAttack, updateMsgOne, updateMsgTwo };
+  const updateView = (locationChange) => {
+    for(let location of locationChange.oldLocations){
+      let cell = getTableCell(location.row, location.col);
+      cell.classList.remove('ship');
+    }
+    
+    for(let location of locationChange.newLocations){
+      let cell = getTableCell(location.row, location.col);
+      cell.classList.add('ship');
+    }
+    
+  }
+
+  return { 
+    setUp, 
+    setUpView, 
+    markComputerAttack, 
+    updateMsgOne, 
+    updateMsgTwo,
+    updateView
+   };
 }
 
 export { 
