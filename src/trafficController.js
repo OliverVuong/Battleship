@@ -50,13 +50,31 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
         locationChange = {};
     }
 
+    const printGrid = (shipGrid) => {
+        for(let row = 0; row < 10; row++){
+            let rowStr = '';
+            for(let col = 0; col < 10; col++){
+                if(shipGrid[row][col]){
+                    rowStr += shipGrid[row][col].getID()
+                } else {
+                    rowStr += '_';
+                }
+                rowStr += " ";
+            }
+            console.log(rowStr);
+        }
+    }
+
     //check if another ship is too close to the proposed location
     //a ship is too close if it is adjacent, there should be one space
     const isSpaceViolationCell = (row, col, shipID) => {
         if( isOutOfBoundsCoord(row, col) ||
-            shipGrid[row][col] === null){
+            shipGrid[row][col] === null ||
+            shipGrid[row][col] === undefined
+            ){
             return false;
         }
+        //printGrid(shipGrid);//////////
         return shipGrid[row][col].getID() !== shipID;
     }
 
@@ -84,6 +102,10 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
     }
 
     const markNewLocation = (shipID, newLocations) => {
+        /* console.log('here in mark new location')
+        for(let i = 0; i < shipArr.length; i++){
+            console.log(`index: ${i}, shipID: ${shipArr[i].getID()}`);
+        } */
         for(let location of newLocations){
             shipGrid[location.row][location.col] = shipArr[shipID - 1];
 
@@ -93,8 +115,8 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
 
     const moveShip = (shipID, direction) => {
 
-        let oldLocations = shipLocations[shipID];
-        let newLocations = getNewLocations(oldLocations, direction);
+        let oldLocations = structuredClone(shipLocations[shipID]);
+        let newLocations = structuredClone(getNewLocations(oldLocations, direction));
 
         if(isOutOfBounds(newLocations)){
             error = 'outOfBounds';
@@ -102,6 +124,7 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
             possibleMove = false;
             return;
         }
+        //console.log(isSpaceViolation(shipID, newLocations));
         if(isSpaceViolation(shipID, newLocations)){
             error = 'spaceViolation';
             resetLocationChange();
@@ -151,11 +174,21 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
         return error;
     }
 
+    const getPossibleMove = () => {
+        return possibleMove;
+    }
+
     const getLocationChange = () => {
         return locationChange;
     }
 
-    return { moveShip, rotateShip, getError, getLocationChange }
+    return { 
+        moveShip,
+        rotateShip,
+        getError,
+        getPossibleMove, 
+        getLocationChange 
+    }
 }
 
 export {

@@ -100,6 +100,29 @@ describe('unobstructed move', () => {
     
 })
 
+describe('unobstructed double move', () => {
+    let myShipGrid = shipGridFactory();
+
+    let myShip = shipFactory(1, 4, 'south');
+    myShipGrid.placeShip(myShip, 6, 6);
+    let trafficController = trafficControllerFactory(
+        myShipGrid.getShipGrid(),
+        myShipGrid.getShipLocations(),
+        myShipGrid.getShipArr());
+        trafficController.moveShip(4, 'left');
+        trafficController.moveShip(4, 'left');
+    test('move left', () => {
+        expect(trafficController.getError()).toEqual('');
+        expect(trafficController.getLocationChange()).toEqual(
+            {
+                oldLocations: [{row: 6, col: 5}],
+                newLocations: [{row: 6, col: 4}]
+            }
+        );
+    })
+    
+})
+
 describe('out of bounds move', () => {
     let myShipGrid = shipGridFactory();
 
@@ -235,6 +258,25 @@ describe('space violation move', () => {
                 newLocations: [{row: 5, col: 4}, {row: 5, col: 5}, {row: 5, col: 6}]
             }
         );
+    })
+
+    describe('space violation double move', () => {
+        let myShipGrid = shipGridFactory();
+    
+        let myShip = shipFactory(1, 8, 'south');
+        myShipGrid.placeShip(myShip, 9, 5);
+    
+        let trafficController = trafficControllerFactory(
+            myShipGrid.getShipGrid(),
+            myShipGrid.getShipLocations(),
+            myShipGrid.getShipArr());
+            trafficController.moveShip(8, 'up');
+            trafficController.moveShip(8, 'up');
+        test('move left', () => {
+            expect(trafficController.getError()).toEqual('');
+            //expect(trafficController.getLocationChange()).toEqual({});
+        })
+        
     })
     
 })

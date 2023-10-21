@@ -49,6 +49,7 @@ const viewController = () => {
   let msgOne;
   let msgTwo;
   let shipSelector;
+  let buttonSuite;
   let gameMaster;
 
   const clearExistingHighlights = () => {
@@ -84,10 +85,48 @@ const viewController = () => {
     createHighlighting(shipGrid);
   }
 
+  const updateShipView = () => {
+
+    if(!gameMaster.getPossibleMove()){
+      console.log('no move exectued- exiting out of update ship view');
+      return;
+    }
+
+    let locationChange = gameMaster.getLocationChange();
+    for(let location of locationChange.oldLocations){
+      let cell = getTableCell(location.row, location.col);
+      cell.classList.remove('ship');
+      cell.classList.remove('selected');
+    }
+    
+    for(let location of locationChange.newLocations){
+      let cell = getTableCell(location.row, location.col);
+      cell.classList.add('ship');
+      cell.classList.add('selected');
+    }
+  }
+
+  const updateErrorMsg = () => {
+    console.log(gameMaster.getErrorMsg());
+  }
+
   const loadMovementButtonFunctionality = () => {
     buttonSuite.up.onclick = () => {
       gameMaster.moveShip(shipSelector.value, 'up');
+      updateShipView();
+      updateErrorMsg();
     }
+  }
+
+  const loadButtonSuite = () => {
+    buttonSuite = {};
+    buttonSuite.up = document.querySelector('.up');
+    buttonSuite.left = document.querySelector('.left');
+    buttonSuite.down = document.querySelector('.down');
+    buttonSuite.right = document.querySelector('.right');
+    buttonSuite.rotate = document.querySelector('.rotate');
+    buttonSuite.randomize = document.querySelector('.randomize');
+    buttonSuite.start = document.querySelector('.start');
   }
 
   const loadElements = () => {
@@ -96,6 +135,7 @@ const viewController = () => {
     msgOne = document.querySelector('.msgOne');
     msgTwo = document.querySelector('.msgTwo');
     shipSelector = document.querySelector('#ship-selector');
+    loadButtonSuite();
     createHighlighting();
   }
 
@@ -167,26 +207,13 @@ const viewController = () => {
     myTD.classList.add('animate')
   }
 
-  const updateView = (locationChange) => {
-    for(let location of locationChange.oldLocations){
-      let cell = getTableCell(location.row, location.col);
-      cell.classList.remove('ship');
-    }
-    
-    for(let location of locationChange.newLocations){
-      let cell = getTableCell(location.row, location.col);
-      cell.classList.add('ship');
-    }
-    
-  }
-
   return { 
     setUp, 
     setUpView, 
     markComputerAttack, 
     updateMsgOne, 
     updateMsgTwo,
-    updateView
+    updateShipView
    };
 }
 

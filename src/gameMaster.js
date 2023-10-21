@@ -82,6 +82,22 @@ const gameMasterFactory = () => {
         return computerTurnResult;
     }
 
+    const moveShip = (shipID, direction) => {
+        board_player_ships.moveShip(shipID, direction);
+    }
+
+    const getLocationChange = () => {
+        return board_player_ships.getLocationChange();
+    }
+
+    const getErrorMsg = () => {
+        return board_player_ships.getErrorMsg();
+    }
+
+    const getPossibleMove = () => {
+        return board_player_ships.getPossibleMove();
+    }
+
     return { 
         getShipGrid, 
         getShipGridWrapper,
@@ -92,7 +108,11 @@ const gameMasterFactory = () => {
         isShipPresentAt,
         processComputerAttack,
         getPlayerTurnResult,
-        getComputerTurnResult
+        getComputerTurnResult,
+        moveShip,
+        getLocationChange,
+        getErrorMsg,
+        getPossibleMove
     };
 }
 

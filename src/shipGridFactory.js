@@ -1,11 +1,15 @@
 import {
     shipFactory
 } from './shipFactory';
+import {
+    trafficControllerFactory
+} from './trafficController';
 
 const shipGridFactory = () => {
     const shipGrid = Array(10).fill().map(() => Array(10).fill(null));
     const shipArr = [];
     const shipLocations = {};
+    const trafficController = trafficControllerFactory(shipGrid, shipLocations, shipArr);
     let outcome = '';
 
     const inBounds = (row, col) => {
@@ -80,43 +84,43 @@ const shipGridFactory = () => {
     const initDefaultShips = () => {
         let ship_1 = shipFactory( 4,'1', 'east');
         placeShip(ship_1, 0, 4);
-        shipArr.push(ship_1);
+        //shipArr.push(ship_1);
 
         let ship_2 = shipFactory( 2,'2', 'south');
         placeShip(ship_2, 0, 9);
-        shipArr.push(ship_2);
+        //shipArr.push(ship_2);
 
         let ship_3 = shipFactory( 2,'3', 'east');
         placeShip(ship_3, 2, 0);
-        shipArr.push(ship_3);
+        //shipArr.push(ship_3);
 
         let ship_4 = shipFactory( 3,'4', 'south');
         placeShip(ship_4, 3, 4);
-        shipArr.push(ship_4);
+        //shipArr.push(ship_4);
 
         let ship_5 = shipFactory( 1,'5', 'south');
         placeShip(ship_5, 3, 6);
-        shipArr.push(ship_5);
+        //shipArr.push(ship_5);
 
         let ship_6 = shipFactory( 3,'6', 'south');
         placeShip(ship_6, 4, 9);
-        shipArr.push(ship_6);
+        //shipArr.push(ship_6);
 
         let ship_7 = shipFactory( 2,'7', 'east');
         placeShip(ship_7, 5, 0);
-        shipArr.push(ship_7);
+        //shipArr.push(ship_7);
 
         let ship_8 = shipFactory(1, '8');
         placeShip(ship_8, 8, 0);
-        shipArr.push(ship_8);
+        //shipArr.push(ship_8);
 
         let ship_9 = shipFactory(1, '9');
         placeShip(ship_9, 9, 5);
-        shipArr.push(ship_9);
+        //shipArr.push(ship_9);
 
         let ship_10 = shipFactory(1, '10');
         placeShip(ship_10, 9, 9);
-        shipArr.push(ship_10);
+        //shipArr.push(ship_10);
     }
     
     const getShipGrid = () => {
@@ -135,6 +139,22 @@ const shipGridFactory = () => {
         return shipGrid[row][col] != null;
     }
 
+    const moveShip = (shipID, direction) => {
+        trafficController.moveShip(shipID, direction);
+    }
+
+    const getLocationChange = () => {
+        return trafficController.getLocationChange();
+    }
+
+    const getErrorMsg = () => {
+        return trafficController.getError();
+    }
+
+    const getPossibleMove = () => {
+        return trafficController.getPossibleMove();
+    }
+
     return { 
         placeShip, 
         getShipLocation,
@@ -145,7 +165,11 @@ const shipGridFactory = () => {
         getShipGrid,
         getShipArr,
         getShipLocations,
-        isShipPresentAt
+        isShipPresentAt,
+        moveShip,
+        getLocationChange,
+        getErrorMsg,
+        getPossibleMove
     };
 }
 
