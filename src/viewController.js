@@ -94,7 +94,6 @@ const viewController = () => {
       console.log('no move exectued- exiting out of update ship view');
       return;
     }
-
     let locationChange = gameMaster.getLocationChange();
     for(let location of locationChange.oldLocations){
       let cell = getTableCell(location.row, location.col);
@@ -140,6 +139,11 @@ const viewController = () => {
     }
     buttonSuite.left.onclick = () => {
       gameMaster.moveShip(shipSelector.value, 'left');
+      updateShipView();
+      updateErrorMsg();
+    }
+    buttonSuite.rotate.onclick = () => {
+      gameMaster.rotateShip(shipSelector.value);
       updateShipView();
       updateErrorMsg();
     }

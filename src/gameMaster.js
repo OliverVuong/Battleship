@@ -86,6 +86,10 @@ const gameMasterFactory = () => {
         board_player_ships.moveShip(shipID, direction);
     }
 
+    const rotateShip = (shipID, direction) => {
+        board_player_ships.rotateShip(shipID);
+    }
+
     const getLocationChange = () => {
         return board_player_ships.getLocationChange();
     }
@@ -110,6 +114,7 @@ const gameMasterFactory = () => {
         getPlayerTurnResult,
         getComputerTurnResult,
         moveShip,
+        rotateShip,
         getLocationChange,
         getErrorMsg,
         getPossibleMove

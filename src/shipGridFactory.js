@@ -143,6 +143,10 @@ const shipGridFactory = () => {
         trafficController.moveShip(shipID, direction);
     }
 
+    const rotateShip = (shipID) => {
+        trafficController.rotateShip(shipID);
+    }
+
     const getLocationChange = () => {
         return trafficController.getLocationChange();
     }
@@ -167,6 +171,7 @@ const shipGridFactory = () => {
         getShipLocations,
         isShipPresentAt,
         moveShip,
+        rotateShip,
         getLocationChange,
         getErrorMsg,
         getPossibleMove

@@ -33,6 +33,30 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
         return newLocations;
     }
 
+    const getNewRotationLocations = (oldLocations, newDirection) => {
+        let anchorLocation = oldLocations[0];
+        let newLocations = [];
+        let rowMod = 0;
+        let colMod = 0;
+        let row = anchorLocation.row;
+        let col = anchorLocation.col;
+        switch(newDirection){
+            case 'south':
+                rowMod = 1;
+                break;
+            case 'east':
+                colMod = 1;
+                break;
+        }
+        newLocations.push({row, col});
+        for(let len = 1; len < oldLocations.length; len++){
+            row = row + rowMod;
+            col = col + colMod;
+            newLocations.push({row, col});
+        }
+        return newLocations;
+    }
+
     const isOutOfBoundsCoord = (row, col) => {
         return row < 0 || row >= 10 || col < 0 || col >= 10;
     }
@@ -68,6 +92,7 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
     //check if another ship is too close to the proposed location
     //a ship is too close if it is adjacent, there should be one space
     const isSpaceViolationCell = (row, col, shipID) => {
+        //console.log(`row: ${row}, col: ${col}, shipID: ${shipID}`);
         if( isOutOfBoundsCoord(row, col) ||
             shipGrid[row][col] === null ||
             shipGrid[row][col] === undefined
@@ -139,16 +164,16 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
         markNewLocation(shipID, newLocations);
     }
 
-    const getNewRotationLocations = (anchorLocation, newDirection) => {
+    /* const getNewRotationLocations = (anchorLocation, newDirection) => {
         return [];
-    }
+    } */
     
     const rotateShip = (shipID) => {
-        let ship = shipArr.get(shipID - 1);
+        let ship = shipArr[shipID - 1];
         let oldDirection = ship.getDirection();
         let newDirection = oldDirection === 'south' ? 'east' : 'south';
-        let oldLocations = shipLocations[shipID - 1];
-        let newLocations = getNewRotationLocations(oldLocations[0], newDirection);
+        let oldLocations = shipLocations[shipID];
+        let newLocations = getNewRotationLocations(oldLocations, newDirection);
         
         if(isOutOfBounds(newLocations)){
             error = 'outOfBounds';
@@ -165,7 +190,8 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
 
         error = '';
         possibleMove = true;
-        ship.setDirection(newDirection);/////////need to implement
+        locationChange = {oldLocations, newLocations};
+        ship.setDirection(newDirection);
         removeOldLocation(shipID, oldLocations);
         markNewLocation(shipID, newLocations);
     }

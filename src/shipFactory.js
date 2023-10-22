@@ -1,7 +1,7 @@
 const shipFactory = (len, shipID ='noID', dir = 'south') => {
     const id = shipID;
     const length = len;
-    const direction = dir;
+    let direction = dir;
     let hitsSustained = 0;
     let sunk = false;
 
@@ -15,6 +15,9 @@ const shipFactory = (len, shipID ='noID', dir = 'south') => {
             sunk = true;
             //console.log('sunk');
         }
+    }
+    const setDirection = (newDirection) => {
+        direction = newDirection;
     }
     const isSunk = () => {
         return sunk;
@@ -31,6 +34,7 @@ const shipFactory = (len, shipID ='noID', dir = 'south') => {
     return { 
         getHitsSustained,
         hit,
+        setDirection,
         isSunk,
         getLength,
         getDirection,
