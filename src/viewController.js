@@ -80,10 +80,23 @@ const viewController = () => {
     }
   }
 
+  const disableMovementBtns = () => {
+    buttonSuite.up.disabled = true;
+    buttonSuite.left.disabled = true;
+    buttonSuite.down.disabled = true;
+    buttonSuite.right.disabled = true;
+    buttonSuite.rotate.disabled = true;
+    buttonSuite.randomize.disabled = true;
+    buttonSuite.start.disabled = true;
+    shipSelector.disabled = true;
+  }
+
   const loadButtonFunctionality = (processUserInput, shipGrid) => {
     buttonSuite.start.onclick = () => {
       makeAttackGridClickable(attackGrid, processUserInput);
       disableMovementBtns();
+      clearExistingHighlights();
+      //hideMovementBtns();//need to implement
     }
     createHighlighting(shipGrid);
   }
