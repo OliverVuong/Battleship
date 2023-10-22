@@ -116,6 +116,21 @@ const viewController = () => {
       updateShipView();
       updateErrorMsg();
     }
+    buttonSuite.down.onclick = () => {
+      gameMaster.moveShip(shipSelector.value, 'down');
+      updateShipView();
+      updateErrorMsg();
+    }
+    buttonSuite.right.onclick = () => {
+      gameMaster.moveShip(shipSelector.value, 'right');
+      updateShipView();
+      updateErrorMsg();
+    }
+    buttonSuite.left.onclick = () => {
+      gameMaster.moveShip(shipSelector.value, 'left');
+      updateShipView();
+      updateErrorMsg();
+    }
   }
 
   const loadButtonSuite = () => {
