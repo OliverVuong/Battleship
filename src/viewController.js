@@ -46,6 +46,7 @@ const markAttack = (click, shipPresent) => {
 const viewController = () => {
   let shipTBody;
   let attackGrid;
+  let errorMessage;
   let msgOne;
   let msgTwo;
   let shipSelector;
@@ -80,8 +81,10 @@ const viewController = () => {
   }
 
   const loadButtonFunctionality = (processUserInput, shipGrid) => {
-
-    makeAttackGridClickable(attackGrid, processUserInput);
+    buttonSuite.start.onclick = () => {
+      makeAttackGridClickable(attackGrid, processUserInput);
+      disableMovementBtns();
+    }
     createHighlighting(shipGrid);
   }
 
@@ -107,7 +110,16 @@ const viewController = () => {
   }
 
   const updateErrorMsg = () => {
-    console.log(gameMaster.getErrorMsg());
+    let errorCode = gameMaster.getErrorMsg();
+    console.log(errorCode);
+    if(errorCode === 'outOfBounds'){
+      errorMessage.textContent = 'Cannot move ships out of bounds.';
+    } else if(errorCode === 'spaceViolation'){
+      errorMessage.textContent = 'Cannot move ships to close. A minimum of one empty space between ships is required.';
+    } else {
+      errorMessage.textContent = '';
+    }
+    
   }
 
   const loadMovementButtonFunctionality = () => {
@@ -147,6 +159,7 @@ const viewController = () => {
   const loadElements = () => {
     shipTBody = document.querySelector('.shipGrid');
     attackGrid = document.querySelector('.attackGrid');
+    errorMessage = document.querySelector('.errorText');
     msgOne = document.querySelector('.msgOne');
     msgTwo = document.querySelector('.msgTwo');
     shipSelector = document.querySelector('#ship-selector');
