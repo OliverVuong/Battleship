@@ -76,7 +76,7 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
 
     const printGrid = (shipGrid) => {
         for(let row = 0; row < 10; row++){
-            let rowStr = '';
+            let rowStr = row + ": ";
             for(let col = 0; col < 10; col++){
                 if(shipGrid[row][col]){
                     rowStr += shipGrid[row][col].getID()
@@ -208,12 +208,77 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
         return locationChange;
     }
 
+    const getProposedLocation = (ship, row, col) => {
+        let proposedLocation = [];
+
+        let rowMod = ship.getDirection() === 'south' ? 1 : 0;
+        let colMod = ship.getDirection() === 'east' ? 1 : 0;
+        for(let i = 0; i < ship.getLength(); i++){
+            proposedLocation.push({row, col});
+            row = row + (rowMod);
+            col = col + (colMod);
+        }
+        return proposedLocation;
+    }
+
+    const getSurroundingLocations = (ship, row, col) => {
+        let surroundingLocations = [];
+        let dir = ship.getDirection();
+        let len = ship.getLength();
+        if(dir === 'south'){
+            surroundingLocations.push({row: row - 1, col: col    });
+            surroundingLocations.push({row: row - 1, col: col - 1});
+            surroundingLocations.push({row: row - 1, col: col + 1});
+            for(let mod = 0; mod < len; mod++){
+                surroundingLocations.push({row: row + mod, col: col - 1});
+                surroundingLocations.push({row: row + mod, col: col + 1});
+            }
+            surroundingLocations.push({row: row + len, col: col});
+            surroundingLocations.push({row: row + len, col: col - 1});
+            surroundingLocations.push({row: row + len, col: col + 1});
+        } else { //'east'
+            surroundingLocations.push({row: row    , col: col - 1});
+            surroundingLocations.push({row: row + 1, col: col - 1});
+            surroundingLocations.push({row: row - 1, col: col - 1});
+            for(let mod = 0; mod < len; mod++){
+                surroundingLocations.push({row: row - 1, col: col + mod});
+                surroundingLocations.push({row: row + 1, col: col + mod});
+            }
+            surroundingLocations.push({row: row    , col: col + len});
+            surroundingLocations.push({row: row - 1, col: col + len});
+            surroundingLocations.push({row: row + 1, col: col + len});
+        }
+        console.log('surroundsing of ship ' + ship.getID());
+        console.log(surroundingLocations);
+        return surroundingLocations;
+    }
+
+    const hasSpaceConflictFromLocations = (surroundingLocations) => {
+        for(let location of surroundingLocations){
+            if(isOutOfBoundsCoord(location.row, location.col)) continue;
+            if(shipGrid[location.row][location.col] === null) continue;
+            if(shipGrid[location.row][location.col] === undefined) continue;
+            
+            console.log('conflict ');
+            console.log(shipGrid[location.row][location.col]);
+            console.log(shipGrid[location.row][location.col].getID());
+            console.log(location);
+            return true;
+        }
+    }
+
+    const hasSpaceConflict = (ship, row, col) => {
+        return hasSpaceConflictFromLocations(getSurroundingLocations(ship, row, col));
+    }
+
     return { 
         moveShip,
         rotateShip,
         getError,
         getPossibleMove, 
-        getLocationChange 
+        getLocationChange,
+        hasSpaceConflict,
+        printGrid////////
     }
 }
 

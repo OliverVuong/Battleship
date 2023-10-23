@@ -102,6 +102,14 @@ const gameMasterFactory = () => {
         return board_player_ships.getPossibleMove();
     }
 
+    const randomizePlayerBoard = () => {
+        board_player_ships.randomize();
+    }
+
+    const randomizeComputerBoard = () => {
+        board_computer_ships.randomize();
+    }
+
     return { 
         getShipGrid, 
         getShipGridWrapper,
@@ -117,7 +125,9 @@ const gameMasterFactory = () => {
         rotateShip,
         getLocationChange,
         getErrorMsg,
-        getPossibleMove
+        getPossibleMove,
+        randomizePlayerBoard,
+        randomizeComputerBoard
     };
 }
 

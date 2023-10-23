@@ -91,12 +91,32 @@ const viewController = () => {
     shipSelector.disabled = true;
   }
 
+  const clearShipDisplay = () => {
+    for(let row = 0; row < 10; row++){
+      for(let col = 0; col < 10; col++){
+        let cell = getTableCell(row, col);
+        cell.classList.remove('ship');
+        cell.classList.remove('selected');
+      }
+    }
+  }
+
+  const clearShipSelector = () => {
+    shipSelector.value = 'none';
+  }
+
   const loadButtonFunctionality = (processUserInput, shipGrid) => {
     buttonSuite.start.onclick = () => {
       makeAttackGridClickable(attackGrid, processUserInput);
       disableMovementBtns();
       clearExistingHighlights();
       //hideMovementBtns();//need to implement
+    }
+    buttonSuite.randomize.onclick = () => {
+      gameMaster.randomizePlayerBoard();
+      clearShipDisplay();
+      clearShipSelector();
+      displayShips(gameMaster.getShipGrid(), shipTBody)
     }
     createHighlighting(shipGrid);
   }
