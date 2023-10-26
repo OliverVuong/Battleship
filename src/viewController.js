@@ -17,19 +17,6 @@ const displayShips = (shipGrid, table) => {
     }
 }
 
-const makeAttackGridClickable = (tbody, processUserInput) => {
-  for(let row = 0; row < 10; row++){
-      for(let col = 0; col < 10; col++){
-          let tableRow = tbody.children[row + 1];
-          let cell = tableRow.children[col + 1];
-          cell.onclick = (click) => {
-            processUserInput(row, col, click);
-            //console.log(`marking this from onclick ${this}`);
-          }
-      }
-  }
-}
-
 const markAttack = (click, shipPresent) => {
   console.log(click.target);
   let myTD = click.target;
@@ -101,13 +88,36 @@ const viewController = () => {
     }
   }
 
+  const lockoutAttackGrid = () => {
+    for(let row = 0; row < 10; row++){
+        let tableRow = attackGrid.children[row + 1];
+        for(let col = 0; col < 10; col++){
+            let cell = tableRow.children[col + 1];
+            cell.onclick = null;
+        }
+    }
+  }
+
+  const makeAttackGridClickable = (processUserInput) => {
+    for(let row = 0; row < 10; row++){
+        for(let col = 0; col < 10; col++){
+            let tableRow = attackGrid.children[row + 1];
+            let cell = tableRow.children[col + 1];
+            cell.onclick = (click) => {
+              processUserInput(row, col, click);
+              //console.log(`marking this from onclick ${this}`);
+            }
+        }
+    }
+  }
+
   const clearShipSelector = () => {
     shipSelector.value = 'none';
   }
 
   const loadButtonFunctionality = (processUserInput, shipGrid) => {
     buttonSuite.start.onclick = () => {
-      makeAttackGridClickable(attackGrid, processUserInput);
+      makeAttackGridClickable(processUserInput);
       disableMovementBtns();
       clearExistingHighlights();
       //hideMovementBtns();//need to implement
@@ -278,7 +288,9 @@ const viewController = () => {
     markComputerAttack, 
     updateMsgOne, 
     updateMsgTwo,
-    updateShipView
+    updateShipView,
+    lockoutAttackGrid,
+    makeAttackGridClickable
    };
 }
 

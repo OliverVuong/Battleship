@@ -21,6 +21,8 @@ const websiteManagerFactory = () => {
             return;
         }
 
+        myViewController.lockoutAttackGrid();
+
         markAttack(
             click, 
             game.isShipPresentAt(
@@ -54,7 +56,12 @@ const websiteManagerFactory = () => {
         let target = game.processComputerAttack();
         //console.log(target);
         //update player ship grid to show attack
-        myViewController.markComputerAttack(target.row, target.col);
+        setTimeout(() => {
+            myViewController.markComputerAttack(target.row, target.col);
+            myViewController.makeAttackGridClickable(processUserInput);
+        }
+        ,3000);
+        
 
         //display outcome
         console.log(`Your opponent fires at (${target.row}, ${target.col}) and ${game.getComputerTurnResult()}`);
