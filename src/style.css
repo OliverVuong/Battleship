@@ -70,3 +70,56 @@ td.hit {
 td.selected {
     background-color: turquoise;
 }
+
+.tableContainer {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 150px;
+}
+
+
+button {
+    height: 25px;
+    width: 80px;
+}
+
+button.start {
+    height:50px;
+}
+
+.buttonsContainer {
+display: inline-grid;
+grid-template-rows: 1fr 1fr;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+grid-template-areas:
+    ". up . rotate start"
+    "left down right randomize  start"
+}
+
+.up {
+grid-area: up;
+}
+
+.left {
+grid-area: left;
+}
+
+.down {
+grid-area: down;
+}
+
+.right {
+grid-area: right;
+}
+
+.rotate {
+grid-area: rotate;
+}
+
+.randomize {
+grid-area: randomize;
+}
+
+.start {
+grid-area: start;
+}
