@@ -33,6 +33,7 @@ const markAttack = (click, shipPresent) => {
 const viewController = () => {
   let shipTBody;
   let attackGrid;
+  let errorContainer;
   let errorMessage;
   let msgOne;
   let msgTwo;
@@ -120,7 +121,11 @@ const viewController = () => {
       makeAttackGridClickable(processUserInput);
       disableMovementBtns();
       clearExistingHighlights();
-      //hideMovementBtns();//need to implement
+
+      document.querySelector('.rightContainer').style.visibility = 'visible';
+      document.querySelector('.buttonContainer').style.visibility = 'hidden';
+      
+      msgOne.textContent = 'Attack your opponent by clicking a cell on their grid.';
     }
     buttonSuite.randomize.onclick = () => {
       gameMaster.randomizePlayerBoard();
@@ -156,10 +161,13 @@ const viewController = () => {
     console.log(errorCode);
     if(errorCode === 'outOfBounds'){
       errorMessage.textContent = 'Cannot move ships out of bounds.';
+      errorContainer.style.visibility = 'visible';
     } else if(errorCode === 'spaceViolation'){
       errorMessage.textContent = 'Cannot move ships to close. A minimum of one empty space between ships is required.';
+      errorContainer.style.visibility = 'visible';
     } else {
       errorMessage.textContent = '';
+      errorContainer.style.visibility = 'hidden';
     }
     
   }
@@ -207,6 +215,7 @@ const viewController = () => {
     shipTBody = document.querySelector('.shipGrid');
     attackGrid = document.querySelector('.attackGrid');
     errorMessage = document.querySelector('.errorText');
+    errorContainer = document.querySelector('.errorContainer');
     msgOne = document.querySelector('.msgOne');
     msgTwo = document.querySelector('.msgTwo');
     shipSelector = document.querySelector('#ship-selector');

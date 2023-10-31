@@ -123,3 +123,17 @@ grid-area: randomize;
 .start {
 grid-area: start;
 }
+
+.rightContainer {
+    visibility: hidden;
+}
+
+.errorContainer {
+    visibility: hidden;
+}
+
+.errorText {
+    width: fit-content;
+    padding: 5px 2px;
+    border: 1px solid red;
+}
