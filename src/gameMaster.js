@@ -23,6 +23,7 @@ const gameMasterFactory = () => {
 
     board_player_ships.initDefaultShips();
     board_computer_ships.initDefaultShips();
+    board_computer_ships.randomize();
     const computerTargetingAI = computerTargetingAIFactory(board_computer_attacks);
     let attackLocation;
     

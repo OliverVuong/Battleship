@@ -240,6 +240,10 @@ const shipGridFactory = () => {
         return trafficController.getPossibleMove();
     }
 
+    const printGrid = () => {
+        trafficController.printGrid();
+    }
+
     return { 
         placeShip, 
         getShipLocation,
@@ -256,7 +260,8 @@ const shipGridFactory = () => {
         rotateShip,
         getLocationChange,
         getErrorMsg,
-        getPossibleMove
+        getPossibleMove,
+        printGrid
     };
 }
 

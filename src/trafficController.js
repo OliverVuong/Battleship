@@ -74,7 +74,7 @@ const trafficControllerFactory = (shipGridIn, shipLocationsIn, shipArrIn) => {
         locationChange = {};
     }
 
-    const printGrid = (shipGrid) => {
+    const printGrid = () => {
         for(let row = 0; row < 10; row++){
             let rowStr = row + ": ";
             for(let col = 0; col < 10; col++){
